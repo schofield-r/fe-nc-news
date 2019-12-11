@@ -1,25 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header'
+import NavBar from './components/NavBar'
+import {Router} from '@reach/router'
+import Articles from './components/Articles'
+import Homepage from './components/Homepage'
+import SingleArticle from './components/SingleArticle'
+import ErrorMessages from './components/ErrorMessages';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="App">
+      <Header/>
+      <NavBar/>
+      <Router>
+        <Homepage path='/'/>
+        <Articles path='/articles/topics/:topic'/>
+        <Articles path='/articles'/>
+        <SingleArticle path='/articles/:article_id'/>
+        <ErrorMessages default path='/' err={{msg:'somethings wrong...',status:500}}/>
+      </Router>
+    </main>
   );
 }
 
