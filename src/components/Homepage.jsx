@@ -5,7 +5,7 @@ const Homepage = () => {
   return (
     <main>
       <p>Hello!!</p>
-      <LogIn />
+
     </main>
   );
 };

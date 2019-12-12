@@ -39,7 +39,8 @@ class LogIn extends Component {
   handleLogin=(event)=>{
     event.preventDefault()
     getUser(this.state.username).then((user)=>{
-      console.log(user)
+      this.props.setUser(user)
+      console.log(user,'in login')
       this.setState({user:user})
     })
   }

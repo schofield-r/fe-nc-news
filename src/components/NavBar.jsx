@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
 import { getTopics } from "./Api";
+import LogIn from "./LogIn";
 
 
 class NavBar extends Component {
@@ -11,6 +12,7 @@ class NavBar extends Component {
     //console.log(topics);
     return (
       <div>
+        <LogIn  setUser={this.props.setUser}/>
         <nav>
           <Link to="/">Home</Link>|<Link to="/articles">All Articles</Link> |
           {topics.map(topic => {
