@@ -5,7 +5,7 @@ class VoteUpdater extends Component {
   state = { voteDiff: 0 };
   render() {
     return (
-      <div>
+      <section>
         <p>Votes: {this.props.votes + this.state.voteDiff}</p>
         <button onClick={() => this.handleVote(1)} value={1}>
           Upvote
@@ -13,7 +13,7 @@ class VoteUpdater extends Component {
         <button onClick={() => this.handleVote(-1)} value={-1}>
           Downvote
         </button>
-      </div>
+      </section>
     );
   }
   handleVote = voteChange => {

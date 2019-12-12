@@ -21,18 +21,21 @@ class LogIn extends Component {
     <p>Name: {this.state.user.name}</p>
    
    
-      {/* <img src={this.state.user.avatar_url} onerror={()=>this.imgErr()}/> */}
-      <img src={this.state.user.avatar_url} onerror="this.onerror=null; this.src='Default.jpg'" />
+      <img src={this.state.user.avatar_url} onerror="this.onerror =null;this.src='https://t4.ftcdn.net/jpg/00/64/67/63/500_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';"/>
+      {/* <img src={this.state.user.avatar_url} onError="this.onerror=null; this.src='Default.jpg'" /> */}
    
     </section>
-
+//https://t4.ftcdn.net/jpg/00/64/67/27/240_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg
     );
   }
-  imgErr=()=>{
-    return(
-      'https://t4.ftcdn.net/jpg/00/64/67/63/500_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'
-    )
-  }
+  //window.onerror = function(event){
+
+  //}
+  // imgErr(){
+  //   return(
+  //     'https://t4.ftcdn.net/jpg/00/64/67/63/500_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'
+  //   )
+  // }
   handleLogin=(event)=>{
     event.preventDefault()
     getUser(this.state.username).then((user)=>{

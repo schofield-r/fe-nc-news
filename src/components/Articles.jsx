@@ -10,16 +10,19 @@ class Articles extends Component {
     const { articles} = this.state
     //console.log(articles, "here");
     if(this.state.isLoading){
-      return(
+      return(<section>
+
         <p>Loading...</p>
+        <img src='https://assets.materialup.com/uploads/497a3ff8-45b5-4a0b-84f5-542153c586db/preview.gif'/>
+      </section>
       )
     } if (this.state.err) {
       return <ErrorMessages err={this.state.err} />;
     }
     return (
-      <main>
+      <main><label htmlFor="searchBy">Search By:</label>
         <select value={this.state.sort_by} onChange={this.handleSortByChange}>
-          <label htmlFor="">Search By:</label>
+          
           <option value='created_at'>Date Posted</option>
           <option value='votes'>Votes</option>
           <option value='comment_count'>Comment Count</option>
@@ -47,11 +50,12 @@ class Articles extends Component {
    // console.log(this.props.topic,'props')
     getArticles(this.props.topic).then(articles=>
       this.setState({articles:articles,isLoading:false})
-    ).catch(err => {
-      this.setState({
-        err: { msg: err.response.data.msg, status: err.response.status },
-        isLoading: false
-      })})
+    ).catch(err => { console.dir(err)
+      // this.setState({
+        // err: { msg: err.response.data.msg, status: err.response.status },
+        // isLoading: false
+      })
+    //})
   }
   componentDidUpdate(prevProps,prevState){
     if(prevProps.topic !== this.props.topic||this.state.sort_by !== prevState.sort_by||this.state.order !== prevState.order){
