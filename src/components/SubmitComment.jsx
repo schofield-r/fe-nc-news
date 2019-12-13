@@ -14,7 +14,7 @@ class SubmitComment extends Component {
         <input
           onChange={this.handleChange}
           name="body"
-          value={this.state.bodyInput}
+          value={this.state.body}
         />
         <button>Comment</button>
       </form>
