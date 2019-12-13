@@ -19,7 +19,7 @@ class App extends Component{
           <Homepage path="/"  />
           <Articles path="/articles/topics/:topic" />
           <Articles path="/articles" />
-          <SingleArticle path="/articles/:article_id" />
+          <SingleArticle path="/articles/:article_id" user={this.state.user.username} />
           <ErrorMessages
             default
             path="/"

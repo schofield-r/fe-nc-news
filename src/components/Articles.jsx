@@ -13,7 +13,7 @@ class Articles extends Component {
       return(<section>
 
         <p>Loading...</p>
-        <img src='https://assets.materialup.com/uploads/497a3ff8-45b5-4a0b-84f5-542153c586db/preview.gif'/>
+        <img src='https://assets.materialup.com/uploads/497a3ff8-45b5-4a0b-84f5-542153c586db/preview.gif' alt='loading gif'/>
       </section>
       )
     } if (this.state.err) {
@@ -38,7 +38,8 @@ class Articles extends Component {
               <li key={article.article_id}>
                 <Link to={`/articles/${article.article_id}`} >{article.title}<br></br>
                 </Link>
-                Votes:{article.votes}
+                Votes:{article.votes}<br></br>
+                Comment Count : {article.comment_count}
               </li>
             );
           })}

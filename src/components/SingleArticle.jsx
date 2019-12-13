@@ -3,7 +3,7 @@ import { getSingleArticle } from "./Api";
 import ErrorMessages from "./ErrorMessages";
 import Comments from "./Comments";
 import ViewToggler from "./ViewToggler";
-import SubmitComment from "./SubmitComment";
+
 import VoteUpdater from "./VoteUpdater";
 
 class SingleArticle extends Component {
@@ -34,7 +34,7 @@ class SingleArticle extends Component {
        
         <br></br>
         <ViewToggler>
-          <Comments article_id={this.props.article_id} />
+          <Comments article_id={this.props.article_id} user={this.props.user}/>
         </ViewToggler>
       </main>
     );

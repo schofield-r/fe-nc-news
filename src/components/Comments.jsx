@@ -1,55 +1,77 @@
 import React, { Component } from "react";
-import Axios from "axios";
 import SubmitComment from "./SubmitComment";
 import VoteUpdater from "./VoteUpdater";
+import { deleteComment, getComments } from "./Api";
 
 class Comments extends Component {
   state = { comments: [], isLoading: true };
   render() {
+    console.log(this.props, "in comment");
+    if (this.state.isLoading) {
+      return <p>Loading....</p>;
+    }
     return (
       <main>
-        <SubmitComment
-          article_id={this.props.article_id}
-          addComment={this.addComment}
-          
-        />
+        {this.props.user && (
+          <SubmitComment
+            article_id={this.props.article_id}
+            addComment={this.addComment}
+            user={this.props.user}
+          />
+        )}
 
-        {this.state.comments.map(comment => {
-          return (
-            <p>
-              {comment.body}
-              <br></br>Author : {comment.author}
-              <br></br>
-              <VoteUpdater
-                type={"comments"}
-                id={comment.comment_id}
-                votes={comment.votes}
-              />
-            </p>
-          );
-        })}
+        <ul>
+          {this.state.comments.map(comment => {
+            return (
+              <li key={comment.comment_id}>
+                {comment.body}
+                <br></br>Author : {comment.author}
+                <br></br>CommentId: {comment.comment_id}
+                <br></br>
+                <VoteUpdater
+                  type={"comments"}
+                  id={comment.comment_id}
+                  votes={comment.votes}
+                />
+                {this.props.user === comment.author ? (
+                  <button
+                    onClick={this.deleteComment}
+                    value={comment.comment_id}
+                  >
+                    Delete
+                  </button>
+                ) : (
+                  <br></br>
+                )}
+              </li>
+            );
+          })}
+        </ul>
       </main>
     );
   }
   componentDidMount() {
-    Axios.get(
-      `https://nc-news-rs.herokuapp.com/api/articles/${this.props.article_id}/comments`
-    ).then(({ data }) => {
-      console.log(data);
-      this.setState({ comments: data.comments });
-    });
+    getComments(this.props.article_id).then(comments =>
+      this.setState({ comments: comments ,isLoading:false})
+    );
   }
   addComment = newComment => {
     this.setState(currentState => {
       console.log("comment added", this.state.comments);
-      return { comments: [newComment, ...currentState.comments] };
+      return { comments: [newComment, ...currentState.comments], isLoading: false };
     });
   };
-  // componentDidUpdate(prevState){
-  //   if(prevState.comments.length !== this.state.comments.length){
+  deleteComment = event => {
+    event.preventDefault();
+    console.log(event.target.value, "comment deleted");
+    deleteComment(event.target.value).then(console.log(event.target.value,'in delete'))
+    
+    const modifiedComments = this.state.comments.filter(comment => comment.comment_id !== Number(event.target.value))
+  
+    this.setState({ comments: modifiedComments})
 
-  //   }
-  // }
+  // })
+  };
 }
 
 export default Comments;

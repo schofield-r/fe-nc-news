@@ -12,16 +12,15 @@ class ViewToggler extends Component {
         </button>
 
         {showContent && this.props.children}
-        {/* {console.log("changed")} */}
       </div>
     );
   }
   toggleShowComments = () => {
     this.setState(currentState => {
-      const show= !currentState.showContent
-      return{
+      const show = !currentState.showContent;
+      return {
         showContent: show
-      }
+      };
     });
   };
 }

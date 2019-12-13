@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import { postComment } from "./Api";
+import ErrorMessages from './ErrorMessages'
 
 class SubmitComment extends Component {
-  state = { username: "", body: "" };
-  render() {
-    // const { usernameInput } = this.state;
+  state = { username: "", body: "", err: null };
+  render() {console.log(this.props.user)
+    if (this.state.err) {
+      return <ErrorMessages err={this.state.err} />;
+    }
     return (
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor="username">Username:</label>
-        <input
-          onChange={this.handleChange}
-          name="username"
-          value={this.state.usernameInput}
-        />
         <label htmlFor="body">Comment:</label>
         <input
           onChange={this.handleChange}
@@ -27,19 +24,25 @@ class SubmitComment extends Component {
   handleChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+    //this.setState({ username: this.props.user });
   };
   handleSubmit = event => {
     event.preventDefault();
+    console.log(this.props, "in submit comment");
 
-    postComment(this.props.article_id,this.state.username,this.state.body)
+    console.log(this.state, "in submit comment state");
+
+    postComment(this.props.article_id, this.props.user, this.state.body)
       .then(comment => {
         this.props.addComment(comment);
-        this.setState(currentState=>{
-          return{ username: "", body: "" }
-        });
+        this.setState({ username: "", body: "" });
       })
-
-      .catch(console.dir);
+      .catch(err => {
+        this.setState({
+          err: { msg: 'please log in', status: err.response.status },
+          isLoading: false
+         })
+      });
   };
 }
 

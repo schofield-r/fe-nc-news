@@ -1,10 +1,10 @@
 import Axios from "axios";
 
-export const getArticles = (topic, sort_by, order  )=> {
+export const getArticles = (topic, sort_by,order_by  )=> {
   return Axios.get(
-    `https://nc-news-rs.herokuapp.com/api/articles?slug=${topic}sort_by=${sort_by}order=${order}`,
+    `https://nc-news-rs.herokuapp.com/api/articles`,
     {
-      params: { topic,sort_by,order }
+      params: { topic,sort_by,order_by }
     }
   ).then(({ data }) => {
     //console.log(data,'data')
@@ -43,4 +43,13 @@ export const getUser=(username)=>{
   return Axios.get(`https://nc-news-rs.herokuapp.com/api/users/${username}`).then(({data})=>{
     return data.user
   })
+}
+export const deleteComment=(comment_id)=>{
+  return Axios.delete(`https://nc-news-rs.herokuapp.com/api/comments/${comment_id}`)
+
+}
+export const getComments=(article_id)=>{
+  return Axios.get(
+    `https://nc-news-rs.herokuapp.com/api/articles/${article_id}/comments`
+  ).then(({ data }) => {return data.comments})
 }
