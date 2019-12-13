@@ -24,7 +24,8 @@ class LogIn extends Component {
 
             <img
               src={this.state.user.avatar_url}
-              onerror="this.onerror =null;this.src='https://t4.ftcdn.net/jpg/00/64/67/63/500_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';" alt='avatar'
+              onerror="this.onerror =null;this.src='https://t4.ftcdn.net/jpg/00/64/67/63/500_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';"
+              alt="avatar"
             />
           </section>
         ) : (
@@ -45,11 +46,6 @@ class LogIn extends Component {
   handleChange = event => {
     this.setState({ username: event.target.value });
   };
-  // componentDidUpdate(prevState){
-  //   if(prevState.loggedIn !== this.state.loggedIn){
-  //     //////what doooo
-  //   }
-  // }
 }
 
 export default LogIn;

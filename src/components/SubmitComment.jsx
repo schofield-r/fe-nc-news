@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { postComment } from "./Api";
-import ErrorMessages from './ErrorMessages'
+import ErrorMessages from "./ErrorMessages";
+import Loading from "./Loading";
 
 class SubmitComment extends Component {
-  state = { username: "", body: "", err: null };
-  render() {console.log(this.props.user)
+  state = { username: "", body: "", err: null, isLoading: true };
+  render() {
+    if (this.state.isLoading && this.state.username === undefined) {
+      return <Loading />;
+    }
     if (this.state.err) {
       return <ErrorMessages err={this.state.err} />;
     }
@@ -24,7 +28,6 @@ class SubmitComment extends Component {
   handleChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
-    //this.setState({ username: this.props.user });
   };
   handleSubmit = event => {
     event.preventDefault();
@@ -39,9 +42,9 @@ class SubmitComment extends Component {
       })
       .catch(err => {
         this.setState({
-          err: { msg: 'please log in', status: err.response.status },
+          err: { msg: err.response.data.msg, status: err.response.status },
           isLoading: false
-         })
+        });
       });
   };
 }

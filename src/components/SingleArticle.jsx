@@ -3,17 +3,16 @@ import { getSingleArticle } from "./Api";
 import ErrorMessages from "./ErrorMessages";
 import Comments from "./Comments";
 import ViewToggler from "./ViewToggler";
-
 import VoteUpdater from "./VoteUpdater";
+import Loading from "./Loading";
 
 class SingleArticle extends Component {
   state = { article: [], isLoading: true, err: null };
 
   render() {
     const { article } = this.state;
-    // console.log(article, "insinglearrt");
     if (this.state.isLoading) {
-      return <p>Loading....</p>;
+      return <Loading />;
     }
     if (this.state.err) {
       return <ErrorMessages err={this.state.err} />;
@@ -23,24 +22,25 @@ class SingleArticle extends Component {
         <h2>{article.topic}</h2>
         <h3>{article.title}</h3>
         <p>{article.body}</p>
-    <p>Author: {article.author}</p>
-  <p>Posted: {article.created_at}</p>
-    
-   <VoteUpdater type={'articles'} id={article.article_id} votes={article.votes}/>
+        <p>Author: {article.author}</p>
+        <p>Posted: {article.created_at}</p>
+        <VoteUpdater
+          type={"articles"}
+          id={article.article_id}
+          votes={article.votes}
+        />
         ------------------ comments------------------
         <br></br>
         <br></br>
         <br></br>
-       
         <br></br>
         <ViewToggler>
-          <Comments article_id={this.props.article_id} user={this.props.user}/>
+          <Comments article_id={this.props.article_id} user={this.props.user} />
         </ViewToggler>
       </main>
     );
   }
   componentDidMount() {
-    //console.log(this.props.article_id);
     getSingleArticle(this.props.article_id)
       .then(article => {
         this.setState({ article: article, isLoading: false });
@@ -50,7 +50,6 @@ class SingleArticle extends Component {
           err: { msg: err.response.data.msg, status: err.response.status },
           isLoading: false
         });
-       // console.dir(err);
       });
   }
 }

@@ -1,9 +1,17 @@
 import React, { Component } from "react";
-import {patchVotes} from './Api'
+import { patchVotes } from "./Api";
+import Loading from "./Loading";
+import ErrorMessages from "./ErrorMessages";
 
 class VoteUpdater extends Component {
-  state = { voteDiff: 0 };
+  state = { voteDiff: 0, err: null, isLoading: true };
   render() {
+    if (this.state.isLoading && this.state.voteDiff !== 0) {
+      return <Loading />;
+    }
+    if (this.state.err) {
+      return <ErrorMessages err={this.state.err} />;
+    }
     return (
       <section>
         <p>Votes: {this.props.votes + this.state.voteDiff}</p>
@@ -17,12 +25,12 @@ class VoteUpdater extends Component {
     );
   }
   handleVote = voteChange => {
-    //optomistically sets state with updated vote
+    //optimistically sets state with updated vote
     this.setState(currentState => {
-      return { voteDiff: currentState.voteDiff + voteChange };
+      return { voteDiff: currentState.voteDiff + voteChange, isLoading: false };
     });
     //api request
-    patchVotes(this.props.type,this.props.id, voteChange)
+    patchVotes(this.props.type, this.props.id, voteChange)
       //if it goes wrong , send err and undo the optomistic rendering of updated votes
       .catch(response => {
         this.setState(currentState => {
@@ -31,7 +39,8 @@ class VoteUpdater extends Component {
               msg: response.response.data.msg,
               status: response.response.status
             },
-            voteDiff: currentState.voteDiff - this.state.voteDiff
+            voteDiff: currentState.voteDiff - this.state.voteDiff,
+            isLoading: false
           };
         });
       });
