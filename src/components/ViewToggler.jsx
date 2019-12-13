@@ -4,7 +4,6 @@ class ViewToggler extends Component {
   state = { showContent: true };
   render() {
     const { showContent } = this.state;
-    //console.log(showContent);
     return (
       <div>
         <button onClick={this.toggleShowComments}>

@@ -15,35 +15,48 @@ class VoteUpdater extends Component {
     return (
       <section>
         <p>Votes: {this.props.votes + this.state.voteDiff}</p>
-        <button onClick={() => this.handleVote(1)} value={1}>
+        <button
+          id="button"
+          onClick={() => this.handleVote(1)}
+          value={1}
+          disabled={this.upvoteEnabling(this.state.voteDiff)}
+        >
           Upvote
         </button>
-        <button onClick={() => this.handleVote(-1)} value={-1}>
+        <button
+          onClick={() => this.handleVote(-1)}
+          value={-1}
+          disabled={this.downvoteEnabling(this.state.voteDiff)}
+        >
           Downvote
         </button>
       </section>
     );
   }
+  upvoteEnabling = vote => {
+    return vote >= 1 ? true : false;
+  };
+  downvoteEnabling = vote => {
+    return vote <= -1 ? true : false;
+  };
+
   handleVote = voteChange => {
-    //optimistically sets state with updated vote
     this.setState(currentState => {
       return { voteDiff: currentState.voteDiff + voteChange, isLoading: false };
     });
-    //api request
-    patchVotes(this.props.type, this.props.id, voteChange)
-      //if it goes wrong , send err and undo the optomistic rendering of updated votes
-      .catch(response => {
-        this.setState(currentState => {
-          return {
-            err: {
-              msg: response.response.data.msg,
-              status: response.response.status
-            },
-            voteDiff: currentState.voteDiff - this.state.voteDiff,
-            isLoading: false
-          };
-        });
+    patchVotes(this.props.type, this.props.id, voteChange).catch(response => {
+      this.setState(currentState => {
+        return {
+          err: {
+            msg: response.response.data.msg,
+            status: response.response.status
+          },
+          voteDiff: currentState.voteDiff - this.state.voteDiff,
+          isLoading: false
+          /////
+        };
       });
+    });
   };
 }
 

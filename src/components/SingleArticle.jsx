@@ -19,6 +19,8 @@ class SingleArticle extends Component {
     }
     return (
       <main>
+        <div className='articleBox'>
+
         <h2>{article.topic}</h2>
         <h3>{article.title}</h3>
         <p>{article.body}</p>
@@ -28,7 +30,8 @@ class SingleArticle extends Component {
           type={"articles"}
           id={article.article_id}
           votes={article.votes}
-        />
+          />
+          </div>
         ------------------ comments------------------
         <br></br>
         <br></br>

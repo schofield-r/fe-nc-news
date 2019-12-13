@@ -8,7 +8,6 @@ import Loading from "./Loading";
 class Comments extends Component {
   state = { comments: [], isLoading: true, err: null };
   render() {
-    console.log(this.props, "in comment");
     if (this.state.isLoading) {
       return <Loading />;
     }
@@ -75,10 +74,7 @@ class Comments extends Component {
   };
   deleteComment = event => {
     event.preventDefault();
-    console.log(event.target.value, "comment deleted");
-    deleteComment(event.target.value).then(
-      console.log(event.target.value, "in delete")
-    );
+    deleteComment(event.target.value).then();
     const modifiedComments = this.state.comments.filter(
       comment => comment.comment_id !== Number(event.target.value)
     );

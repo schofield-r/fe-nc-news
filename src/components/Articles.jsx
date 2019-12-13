@@ -16,7 +16,7 @@ class Articles extends Component {
       return <ErrorMessages err={this.state.err} />;
     }
     return (
-      <main>
+      <main className='App'>
         <label htmlFor="searchBy">Search By:</label>
         <select value={this.state.sort_by} onChange={this.handleSortByChange}>
           <option value="created_at">Date Posted</option>
@@ -50,7 +50,6 @@ class Articles extends Component {
     getArticles(this.props.topic)
       .then(articles => this.setState({ articles: articles, isLoading: false }))
       .catch(err => {
-        console.dir(err);
         this.setState({
           err: { msg: err.response.data.msg, status: err.response.status },
           isLoading: false
@@ -65,7 +64,7 @@ class Articles extends Component {
     ) {
       getArticles(this.props.topic, this.state.sort_by, this.state.order).then(
         articles => {
-          this.setState({ articles: articles, isLoading: false });
+          this.setState({ articles: articles, isLoading: false ,err:null});
         }
       );
     }
@@ -75,7 +74,6 @@ class Articles extends Component {
   };
   handleOrderChange = event => {
     this.setState({ order: event.target.value });
-    console.log("changedorder");
   };
 }
 

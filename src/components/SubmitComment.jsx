@@ -19,6 +19,7 @@ class SubmitComment extends Component {
           onChange={this.handleChange}
           name="body"
           value={this.state.body}
+          required
         />
         <button>Comment</button>
       </form>
@@ -31,10 +32,6 @@ class SubmitComment extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.props, "in submit comment");
-
-    console.log(this.state, "in submit comment state");
-
     postComment(this.props.article_id, this.props.user, this.state.body)
       .then(comment => {
         this.props.addComment(comment);
