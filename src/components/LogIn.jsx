@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import { getUser } from "./Api";
 
 class LogIn extends Component {
-  state = { username:'jessjelly', user: {}, loggedIn: false };
+  state = { username:'', user: {}, loggedIn: false };
   render() {
     return (
       <section> 
         <form onSubmit={this.handleLogin}>
         
-          <div  >
-          <select value={this.state.username} onChange={this.handleChange} >
+         
+          <select value={this.state.username} onChange={this.handleChange} class="select-css" required >
+            <option selected disabled value=''>Choose login username</option>
             <option value="jessjelly">jessjelly</option>
             <option value="tickle122">tickle122</option>
             <option value="grumpy19">grumpy19</option>
@@ -17,8 +18,8 @@ class LogIn extends Component {
             <option value="cooljmessy">cooljmessy</option>
             <option value="weegembump">weegembump</option>
           </select>
-          </div>
-          <button>Login</button>
+        
+          <button className="btn">Login</button>
         </form>
         {this.state.loggedIn ? (
           <section>
@@ -32,7 +33,7 @@ class LogIn extends Component {
             />
           </section>
         ) : (
-          <p>Please Log in to comment</p>
+          <h4>Please Log in to comment</h4>
         )}
       </section>
     );

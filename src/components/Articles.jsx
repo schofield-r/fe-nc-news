@@ -18,12 +18,12 @@ class Articles extends Component {
     return (
       <main className='App'>
         <label htmlFor="searchBy">Search By:</label>
-        <select value={this.state.sort_by} onChange={this.handleSortByChange}>
+        <select value={this.state.sort_by} onChange={this.handleSortByChange} class="select-css">
           <option value="created_at">Date Posted</option>
           <option value="votes">Votes</option>
           <option value="comment_count">Comment Count</option>
         </select>
-        <select value={this.state.order} onChange={this.handleOrderChange}>
+        <select value={this.state.order} onChange={this.handleOrderChange} class="select-css">
           <option value="asc">Ascending</option>
           <option value="desc">Decending</option>
         </select>

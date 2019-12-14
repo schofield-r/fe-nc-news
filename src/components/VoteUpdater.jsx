@@ -15,7 +15,7 @@ class VoteUpdater extends Component {
     return (
       <section>
         <p>Votes: {this.props.votes + this.state.voteDiff}</p>
-        <button
+        <button className="btn"
           id="button"
           onClick={() => this.handleVote(1)}
           value={1}
@@ -24,6 +24,7 @@ class VoteUpdater extends Component {
           Upvote
         </button>
         <button
+          className="btn"
           onClick={() => this.handleVote(-1)}
           value={-1}
           disabled={this.downvoteEnabling(this.state.voteDiff)}

@@ -6,7 +6,7 @@ class ViewToggler extends Component {
     const { showContent } = this.state;
     return (
       <div>
-        <button onClick={this.toggleShowComments}>
+        <button onClick={this.toggleShowComments} className="btn">
           {showContent ? "Hide comments" : "Show comments"}
         </button>
 

@@ -8,8 +8,9 @@ class NavBar extends Component {
   render() {
     const { topics } = this.state;
     return (
-      <div className="topnav">
+      <div className='wholeNavBar'>
         <LogIn setUser={this.props.setUser} />
+        <div className="topnav">
         <nav>
           <Link to="/">Home</Link>
           <Link to="/articles">All Articles</Link>
@@ -21,6 +22,7 @@ class NavBar extends Component {
             );
           })}
         </nav>
+        </div>
       </div>
     );
   }
