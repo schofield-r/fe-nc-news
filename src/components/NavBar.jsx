@@ -9,7 +9,7 @@ class NavBar extends Component {
     const { topics } = this.state;
     return (
       <div className='wholeNavBar'>
-        <LogIn setUser={this.props.setUser} />
+        <LogIn setUser={this.props.setUser} username={this.props.username}/>
         <div className="topnav">
         <nav>
           <Link to="/">Home</Link>

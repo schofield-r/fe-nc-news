@@ -39,6 +39,8 @@ class Articles extends Component {
                 Votes:{article.votes}
                 <br></br>
                 Comment Count : {article.comment_count}
+                <br></br>
+                Date posted: {article.created_at}
               </li>
             );
           })}
@@ -49,11 +51,11 @@ class Articles extends Component {
   componentDidMount() {
     getArticles(this.props.topic)
       .then(articles => this.setState({ articles: articles, isLoading: false }))
-      .catch(err => {
+      .catch(err => {console.log(err)
         this.setState({
           err: { msg: err.response.data.msg, status: err.response.status },
           isLoading: false
-        });
+        }); 
       });
   }
   componentDidUpdate(prevProps, prevState) {

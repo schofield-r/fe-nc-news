@@ -14,7 +14,7 @@ class App extends Component{
     return (
       <main className="App">
         <Header />
-        <NavBar setUser={this.setUser}/>
+        <NavBar setUser={this.setUser} username={this.state.user.username} />
         <Router>
           <Homepage path="/"  />
           <Articles path="/articles/topics/:topic" />
@@ -32,7 +32,6 @@ class App extends Component{
   setUser = newUser => {
   
     this.setState({ user: newUser });
-      console.log("changed user, in app", this.state.user.username);
   };
 }
 
