@@ -3,6 +3,7 @@ import { getArticles } from "./Api";
 import { Link } from "@reach/router";
 import ErrorMessages from "../components/ErrorMessages";
 import Loading from "./Loading";
+import SortingQueries from "./SortingQueries";
 
 class Articles extends Component {
   state = { articles: [], isLoading: true, sort_by: "", order: "", err: null };
@@ -16,17 +17,18 @@ class Articles extends Component {
       return <ErrorMessages err={this.state.err} />;
     }
     return (
-      <main className='App'>
-        <label htmlFor="searchBy">Search By:</label>
-        <select value={this.state.sort_by} onChange={this.handleSortByChange} class="select-css">
-          <option value="created_at">Date Posted</option>
-          <option value="votes">Votes</option>
-          <option value="comment_count">Comment Count</option>
-        </select>
-        <select value={this.state.order} onChange={this.handleOrderChange} class="select-css">
-          <option value="asc">Ascending</option>
-          <option value="desc">Decending</option>
-        </select>
+      <main className="App">
+        <SortingQueries
+          handleSortChange={this.handleSortChange}
+          sort_by={this.state.sort_by}
+          order={this.state.order}
+          searchByOptions={[
+            { name: "Date", value: "created_at" },
+            { name: "Comments", value: "comment_count" },
+            { name: "Votes", value: "votes" }
+          ]}
+        />
+
         <h2>{this.props.topic || "All Articles"}</h2>
         <ul>
           {articles.map(article => {
@@ -51,11 +53,12 @@ class Articles extends Component {
   componentDidMount() {
     getArticles(this.props.topic)
       .then(articles => this.setState({ articles: articles, isLoading: false }))
-      .catch(err => {console.log(err)
+      .catch(err => {
+        console.log(err);
         this.setState({
           err: { msg: err.response.data.msg, status: err.response.status },
           isLoading: false
-        }); 
+        });
       });
   }
   componentDidUpdate(prevProps, prevState) {
@@ -66,16 +69,14 @@ class Articles extends Component {
     ) {
       getArticles(this.props.topic, this.state.sort_by, this.state.order).then(
         articles => {
-          this.setState({ articles: articles, isLoading: false ,err:null});
+          this.setState({ articles: articles, isLoading: false, err: null });
         }
       );
     }
   }
-  handleSortByChange = event => {
-    this.setState({ sort_by: event.target.value });
-  };
-  handleOrderChange = event => {
-    this.setState({ order: event.target.value });
+  handleSortChange = event => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   };
 }
 

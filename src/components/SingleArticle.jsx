@@ -32,9 +32,6 @@ class SingleArticle extends Component {
           votes={article.votes}
           />
           </div>
-        ------------------ comments------------------
-        <br></br>
-        <br></br>
         <br></br>
         <br></br>
         <ViewToggler>

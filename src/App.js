@@ -6,7 +6,11 @@ import { Router } from "@reach/router";
 import Articles from "./components/Articles";
 import Homepage from "./components/Homepage";
 import SingleArticle from "./components/SingleArticle";
+import MostPopular from './components/MostPopular'
 import ErrorMessages from "./components/ErrorMessages";
+import Users from "./components/Users";
+import UserProfile from './components/UserProfile'
+import TopicForm from "./components/TopicForm";
 
 class App extends Component{
   state = { user: {} };
@@ -19,7 +23,12 @@ class App extends Component{
           <Homepage path="/"  />
           <Articles path="/articles/topics/:topic" />
           <Articles path="/articles" />
+          <MostPopular path='/articles/:feature'/>
           <SingleArticle path="/articles/:article_id" user={this.state.user.username} />
+          <Users path='/users'/>
+          <UserProfile path='/users/:username'/>
+          <TopicForm path='/create-topic'/>
+          
           <ErrorMessages
             default
             path="/"
