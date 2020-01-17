@@ -11,6 +11,8 @@ import ErrorMessages from "./components/ErrorMessages";
 import Users from "./components/Users";
 import UserProfile from './components/UserProfile'
 import TopicForm from "./components/TopicForm";
+import NewUser from './components/NewUser'
+import LogInPage from "./components/LogInPage";
 
 class App extends Component{
   state = { user: {} };
@@ -20,6 +22,7 @@ class App extends Component{
         <Header />
         <NavBar setUser={this.setUser} username={this.state.user.username} />
         <Router>
+          <LogInPage path='/login' username={this.state.user.username} setUser={this.setUser}/>
           <Homepage path="/"  />
           <Articles path="/articles/topics/:topic" />
           <Articles path="/articles" />
@@ -28,7 +31,8 @@ class App extends Component{
           <Users path='/users'/>
           <UserProfile path='/users/:username'/>
           <TopicForm path='/create-topic'/>
-          
+          <NewUser path='/create-new-user'/>
+
           <ErrorMessages
             default
             path="/"

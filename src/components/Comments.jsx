@@ -5,6 +5,7 @@ import { deleteComment, getComments } from "./Api";
 import ErrorMessages from "./ErrorMessages";
 import Loading from "./Loading";
 import SortingQueries from "./SortingQueries";
+import { Link } from "@reach/router";
 
 class Comments extends Component {
   state = { comments: [], isLoading: true, sort_by: "", order: "", err: null };
@@ -38,7 +39,7 @@ class Comments extends Component {
             return (
               <li key={comment.comment_id}>
                 {comment.body}
-                <br></br>Author : {comment.author}
+                <br></br>Author : <Link to={`/users/${comment.author}`}>{comment.author}</Link>
                 <br></br>CommentId: {comment.comment_id}
                 <br></br>
                 <VoteUpdater

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import * as api from "./Api";
+import { Link } from "@reach/router";
 
-class LogIn extends Component {
+class LogInPage extends Component {
   state = { username: "", user: {}, loggedIn: false, users: [] };
   render() {
     const { users } = this.state;
@@ -18,7 +19,7 @@ class LogIn extends Component {
               // onerror="this.onerror =null;this.src='https://t4.ftcdn.net/jpg/00/64/67/63/500_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';"
               alt="avatar"
             />
-            <button value='null'>Log Out</button>
+            
           </>
         ) : (
           <>
@@ -31,7 +32,7 @@ class LogIn extends Component {
                 required
               >
                 <option disabled value="">
-                  Choose login username
+                <p>Choose login username</p>  
                 </option>
                 {users.map(user => {
                   return (
@@ -44,16 +45,26 @@ class LogIn extends Component {
 
               <button className="btn">Login</button>
             </form>
+              <p>or </p><Link to='/create-new-user'>create new user</Link>
           </>
         )}
       </section>
     );
   }
-handleLogOut=event=>{
-  event.preventDefault()
-  // this.props.setUser({})
-  this.setState({ loggedIn: false})
-}
+
+  componentDidUpdate(prevProps) {
+    if (this.props.username !== prevProps.username) {
+      if (this.props.username === undefined) {
+        this.setState({ loggedIn: false, username: "" });
+      } else this.setState({ username: this.props.username });
+      console.log(this.state.username);
+    }
+  }
+  handleLogOut = event => {
+    event.preventDefault();
+    this.props.setUser("");
+  };
+
   handleLogin = event => {
     event.preventDefault();
     api.getUser(this.state.username).then(user => {
@@ -68,7 +79,8 @@ handleLogOut=event=>{
     api.getUsers().then(users => {
       this.setState({ users: users });
     });
+    this.setState({ username: this.props.username });
   }
 }
 
-export default LogIn;
+export default LogInPage;

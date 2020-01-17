@@ -1,17 +1,20 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
 import { getTopics } from "./Api";
-import LogIn from "./LogIn";
+import LogInButton from "./LogInButton";
 
 class NavBar extends Component {
-  state = { topics: [] };
+  state = { topics: [],user:this.props.username };
   render() {
     const { topics } = this.state;
     return (
       <div className='wholeNavBar'>
-        <LogIn setUser={this.props.setUser} username={this.props.username}/>
+        {/* {this.state.user === undefined ? <button><Link to='/login'>Log In</Link></button> : <><p>You are logged in as {this.state.user.username}</p> <img
+          src={this.state.user.avatar_url} alt="avatar"
+        /> <button value='null'>Log Out</button></>}  */}
+        <LogInButton setUser={this.props.setUser} username={this.props.username}/>
         <div className="topnav">
-        <nav>
+        <nav> 
           <Link to="/">Home</Link>/
           <Link to="/articles">All Articles</Link> /
           <Link to='/users'>Users</Link>/
