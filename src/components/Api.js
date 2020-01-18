@@ -1,8 +1,8 @@
 import Axios from "axios";
 
-export const getArticles = (topic, sort_by, order,author) => {
+export const getArticles = (topic, sort_by, order, author) => {
   return Axios.get(`https://nc-news-rms.herokuapp.com/api/articles`, {
-    params: { topic, sort_by, order,author }
+    params: { topic, sort_by, order, author }
   }).then(({ data }) => {
     return data.articles;
   });
@@ -59,9 +59,33 @@ export const getComments = (article_id, sort_by, order) => {
   ).then(({ data }) => {
     return data.comments;
   });
-}
-export const getUsers=()=>{
-  return Axios.get('https://nc-news-rms.herokuapp.com/api/users').then(({data})=>{
-    return data.users;
+};
+export const getUsers = () => {
+  return Axios.get("https://nc-news-rms.herokuapp.com/api/users").then(
+    ({ data }) => {
+      return data.users;
+    }
+  );
+};
+export const postUser = (username, name, avatar_url) => {
+  return Axios.post("https://nc-news-rms.herokuapp.com/api/users", {
+    username: username,
+    name: name,
+    avatar_url: avatar_url
+  }).then(({ data }) => {
+    return data.user;
+  });
+};
+export const postTopic = (slug, description) => {
+  return Axios.post("https://nc-news-rms.herokuapp.com/api/topics", {
+    slug: slug,
+    description: description
+  }).then(({ data }) => {
+    return data.topic;
+  });
+};
+export const postArticle = (title,topic,author,body)=>{
+  return Axios.post('https://nc-news-rms.herokuapp.com/api/articles/',{title:title,topic:topic,author:author,body:body}).then(({data})=>{
+    return data.article
   })
 }

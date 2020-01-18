@@ -28,7 +28,6 @@ handleLogOut=event=>{
   componentDidUpdate(prevProps){
 if(this.props.username !== prevProps.username){
   this.setState({ username: this.props.username })
-  console.log(this.state.username)
 }
   }
 }

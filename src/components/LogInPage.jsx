@@ -32,7 +32,7 @@ class LogInPage extends Component {
                 required
               >
                 <option disabled value="">
-                <p>Choose login username</p>  
+                Choose login username 
                 </option>
                 {users.map(user => {
                   return (
@@ -57,7 +57,6 @@ class LogInPage extends Component {
       if (this.props.username === undefined) {
         this.setState({ loggedIn: false, username: "" });
       } else this.setState({ username: this.props.username });
-      console.log(this.state.username);
     }
   }
   handleLogOut = event => {

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getUser } from "./Api";
 import ErrorMessages from "../components/ErrorMessages";
 import Loading from "./Loading";
+import { navigate } from "@reach/router";
 
 class UserProfile extends Component {
   state = { user: {}, isLoading: true, err: null };
@@ -35,6 +36,13 @@ class UserProfile extends Component {
           isLoading: false
         });
       });
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.user !== prevProps.user) {
+      if (this.props.user === undefined) {
+        navigate('/login')
+      } 
+    }
   }
 }
 

@@ -30,6 +30,7 @@ class SubmitComment extends Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
+  
   handleSubmit = event => {
     event.preventDefault();
     postComment(this.props.article_id, this.props.user, this.state.body)
