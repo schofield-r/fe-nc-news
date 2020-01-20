@@ -2,11 +2,15 @@ import React from "react";
 import MostPopular from "./MostPopular";
 import LogInPage from "./LogInPage";
 
-const Homepage = () => {
+const Homepage = (props) => {
   return (
     <main className="leftcolumn">
       <p>Hello!! homepage</p>
-      <LogInPage className="login" />
+      <LogInPage
+        className="login"
+        username={props.username}
+        setUser={props.setUser}
+      />
       <MostPopular className="articleslist" />
     </main>
   );

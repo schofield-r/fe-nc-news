@@ -20,44 +20,56 @@ class App extends Component {
   state = { user: {}, topicsAdded: false ,topic:''};
   render() {
     return (
-      <main className='main' >
-        <div >
-        <Header />
-        
-        <NavBar
-          setUser={this.setUser}
-          username={this.state.user.username}
-          topicsAdded={this.state.topicsAdded}
-          updateTopics={this.updateTopics}
-          /></div><div className='leftcolumn'>
-        <Router >
-          <LogInPage
-            path="/login"
-            username={this.state.user.username}
+      <main className="main">
+        <div>
+          <Header />
+
+          <NavBar
             setUser={this.setUser}
+            username={this.state.user.username}
+            topicsAdded={this.state.topicsAdded}
+            updateTopics={this.updateTopics}
           />
-          <Homepage path="/" />
-          <Articles path="/articles/topics/:topic" setTopic={this.setTopic}/>
-          <Articles path="/articles"  />
-          <MostPopular path="/feature-articles/:feature" />
-          <SingleArticle
-            path="/articles/:article_id"
-            user={this.state.user.username}
-          />
-          <Users path="/users" />
-          <UserProfile
-            path="/users/:username"
-            user={this.state.user.username}
-          />
-          <TopicForm path="/create-topic" updateTopics={this.updateTopics} />
-          <NewUser path="/create-new-user" setUser={this.setUser} />
-          <NewArticle path='/create-new-article' topic={this.state.topic} username={this.state.user.username} setUser={this.setUser}/>
-          <ErrorMessages
-            default
-            path="/"
-            err={{ msg: "somethings wrong...", status: 500 }}
-          />
-        </Router></div>
+        </div>
+        <div className="leftcolumn">
+          <Router>
+            <LogInPage
+              path="/login"
+              username={this.state.user.username}
+              setUser={this.setUser}
+            />
+            <Homepage
+              path="/"
+              username={this.state.user.username}
+              setUser={this.setUser}
+            />
+            <Articles path="/articles/topics/:topic" setTopic={this.setTopic} />
+            <Articles path="/articles" />
+            <MostPopular path="/feature-articles/:feature" />
+            <SingleArticle
+              path="/articles/:article_id"
+              user={this.state.user.username}
+            />
+            <Users path="/users" />
+            <UserProfile
+              path="/users/:username"
+              user={this.state.user.username}
+            />
+            <TopicForm path="/create-topic" updateTopics={this.updateTopics} />
+            <NewUser path="/create-new-user" setUser={this.setUser} />
+            <NewArticle
+              path="/create-new-article"
+              topic={this.state.topic}
+              username={this.state.user.username}
+              setUser={this.setUser}
+            />
+            <ErrorMessages
+              default
+              path="/"
+              err={{ msg: "somethings wrong...", status: 500 }}
+            />
+          </Router>
+        </div>
       </main>
     );
   }

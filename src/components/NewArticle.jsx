@@ -19,13 +19,14 @@ class NewArticle extends Component {
       );
     }
     return (
-      <div className='form'>
+      <div className="form">
         <p>
           Select a topic to post an article in or create a new one
           <Link to="/create-topic"> here</Link>
         </p>
         <form onSubmit={this.handleSubmit}>
           <select
+            name="selectedTopic"
             value={this.state.selectedTopic}
             onChange={this.handleChange}
             required
@@ -86,29 +87,30 @@ class NewArticle extends Component {
       });
   };
   handleChange = event => {
-    this.setState({ selectedTopic: event.target.value });
+    const {name,value} = event.target
+    this.setState({ [name]: value });
   };
   componentDidMount() {
     this.setState({ selectedTopic: this.props.topic });
     getTopics().then(topics => {
       this.setState({ topics: topics });
-      let i = topics.findIndex(
-        topic => topic.slug === this.state.selectedTopic
-      );
-      {
-        this.setState({ topicIndex: i });
-      }
+      // let i = topics.findIndex(
+      //   topic => topic.slug === this.state.selectedTopic
+      // );
+      // {
+      //   this.setState({ topicIndex: i });
+      // }
     });
-    console.log(this.indexFinder(), "index");
-    console.log(this.state.topics[0], "index of topic");
-  }
-  indexFinder = () => {
-    let topics = this.state.topics;
-    console.log(topics);
-    let selectedTopic = this.state.selectedTopic;
-    let i = topics.findIndex(topic => topic.slug === selectedTopic);
-    return i;
-  };
+    // console.log(this.indexFinder(), "index");
+    // console.log(this.state.topics[0], "index of topic");
+ }
+  // indexFinder = () => {
+  //   let topics = this.state.topics;
+  //   console.log(topics);
+  //   let selectedTopic = this.state.selectedTopic;
+  //   let i = topics.findIndex(topic => topic.slug === selectedTopic);
+  //   return i;
+  // };
 }
 
 export default NewArticle;
