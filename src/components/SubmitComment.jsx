@@ -13,7 +13,7 @@ class SubmitComment extends Component {
       return <ErrorMessages err={this.state.err} />;
     }
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className='form'>
         <label htmlFor="body">Comment:</label>
         <input
           onChange={this.handleChange}

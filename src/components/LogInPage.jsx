@@ -6,8 +6,8 @@ class LogInPage extends Component {
   state = { username: "", user: {}, loggedIn: false, users: [] };
   render() {
     const { users } = this.state;
-    return (
-      <section>
+    return (<div className='form'>
+      <section className='login'>
         {this.state.loggedIn ? (
           <>
             <p>You are now logged in as {this.state.user.username}</p>
@@ -28,7 +28,7 @@ class LogInPage extends Component {
               <select
                 value={this.state.username}
                 onChange={this.handleChange}
-                class="select-css"
+                class="form"
                 required
               >
                 <option disabled value="">
@@ -48,7 +48,7 @@ class LogInPage extends Component {
               <p>or </p><Link to='/create-new-user'>create new user</Link>
           </>
         )}
-      </section>
+      </section></div>
     );
   }
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 // import "./App.css";
+import './minimalist.css'
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import { Router } from "@reach/router";
@@ -19,14 +20,16 @@ class App extends Component {
   state = { user: {}, topicsAdded: false ,topic:''};
   render() {
     return (
-      <main className="App">
+      <main className='main' >
+        <div >
         <Header />
+        
         <NavBar
           setUser={this.setUser}
           username={this.state.user.username}
           topicsAdded={this.state.topicsAdded}
           updateTopics={this.updateTopics}
-        />
+          /></div><div className='leftcolumn'>
         <Router >
           <LogInPage
             path="/login"
@@ -35,7 +38,7 @@ class App extends Component {
           />
           <Homepage path="/" />
           <Articles path="/articles/topics/:topic" setTopic={this.setTopic}/>
-          <Articles path="/articles" />
+          <Articles path="/articles"  />
           <MostPopular path="/feature-articles/:feature" />
           <SingleArticle
             path="/articles/:article_id"
@@ -54,7 +57,7 @@ class App extends Component {
             path="/"
             err={{ msg: "somethings wrong...", status: 500 }}
           />
-        </Router>
+        </Router></div>
       </main>
     );
   }

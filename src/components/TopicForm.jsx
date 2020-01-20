@@ -14,7 +14,7 @@ class TopicForm extends Component {
       return <ErrorMessages err={this.state.err} />;
     }
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit } className='form'>
         <h2>Create a new topic</h2>
         <label htmlFor="slug">Topic:</label>
         <input

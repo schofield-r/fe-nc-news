@@ -15,7 +15,7 @@ class Users extends Component {
       return <ErrorMessages err={this.state.err} />;
     }
     return (
-      <div><ul>
+      <div className='userslist' ><ul>
         {this.state.users.map(user => {
           return <li><Link to={`/users/${user.username}`}>{user.username}</Link></li>
         })}</ul>

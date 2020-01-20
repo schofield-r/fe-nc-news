@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { getSingleArticle } from "./Api";
+import { getSingleArticle, deleteArticle } from "./Api";
 import ErrorMessages from "./ErrorMessages";
 import Comments from "./Comments";
 import ViewToggler from "./ViewToggler";
 import VoteUpdater from "./VoteUpdater";
 import Loading from "./Loading";
+import { navigate } from "@reach/router";
 
 class SingleArticle extends Component {
   state = { article: [], isLoading: true, err: null };
@@ -19,19 +20,25 @@ class SingleArticle extends Component {
     }
     return (
       <main>
-        <div className='articleBox'>
-
-        <h2>{article.topic}</h2>
-        <h3>{article.title}</h3>
-        <p>{article.body}</p>
-        <p>Author: {article.author}</p>
-        <p>Posted: {article.created_at}</p>
-        <VoteUpdater
-          type={"articles"}
-          id={article.article_id}
-          votes={article.votes}
+        <div className="articleBox">
+          <h2>{article.topic}</h2>
+          <h3>{article.title}</h3>
+          <p>{article.body}</p>
+          <p>Author: {article.author}</p>
+          <p>Posted: {article.created_at}</p>
+          {this.props.user === article.author  ? (
+            <button onClick={this.deleteArticle} value={article.article_id}>
+              Delete
+            </button>
+          ) : (
+            <br></br>
+          )}
+          <VoteUpdater
+            type={"articles"}
+            id={article.article_id}
+            votes={article.votes}
           />
-          </div>
+        </div>
         <br></br>
         <br></br>
         <ViewToggler>
@@ -52,6 +59,12 @@ class SingleArticle extends Component {
         });
       });
   }
+  deleteArticle = event => {
+    event.preventDefault();
+    deleteArticle(event.target.value);
+    console.log('deleted')
+    navigate(`/articles/topics/${this.state.article.topic}`);
+  };
 }
 
 export default SingleArticle;

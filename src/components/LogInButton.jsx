@@ -5,14 +5,16 @@ class LogInButton extends Component {
   state = { username: "", loggedIn: false, users: [] };
   render() {
     return (
-      <section>
+      <section className='loginbutton'>
         {this.state.username !== undefined ? (
           <>
             <p>You are now logged in as {this.state.username}</p>
             <button onClick={this.handleLogOut} value='null'>Log Out</button>
           </>
         ) : (
-           <button><Link to='/login'>Log In</Link></button>
+          //  <button>
+             <Link to='/login'>Log In</Link>
+            //  </button>
         )}
       </section>
     );

@@ -89,3 +89,6 @@ export const postArticle = (title,topic,author,body)=>{
     return data.article
   })
 }
+export const deleteArticle=(article_id)=>{
+  return Axios.delete(`https://nc-news-rms.herokuapp.com/api/articles/${article_id}`)
+}

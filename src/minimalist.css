@@ -1,0 +1,234 @@
+.main{
+  color:rgb(32, 32, 32);
+  background-color: rgb(255, 255, 255);
+font-family: 'Exo 2', sans-serif;
+
+}
+.avatar {
+  max-height: 100px;
+  max-width: 100px;
+}
+.userslist li{
+list-style: none;
+/* border-width: 2px;
+border-color: black;
+border-style: solid; */
+padding: 5px;
+margin:7px;
+border-radius: 7px;
+display:grid;
+    border-radius: 5px;
+  background-color: #dddddd;
+  padding: 20px;
+
+}
+.userslist ul{
+display:grid;
+}
+.userslist{
+  padding: 5px;
+  /* width:100%; */
+  /* display: flex-inline; */
+  display:grid;
+}
+
+.articleslist li{
+list-style: none;
+/* border-width: 2px; */
+/* border-color: rgb(47, 47, 47); */
+
+/* border-style: solid; */
+padding: 5px; 
+margin:7px;
+border-radius: 7px; 
+    border-radius: 5px;
+  background-color: #dbdbdb;
+  padding: 20px;
+
+
+}
+.articleslist{
+  padding: 5px;
+  width:100%;
+  display: flexbox;
+  order:0;
+}
+a {
+  color: #d60202;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration-line: none;
+  color: #000000;
+}
+a:active {
+  text-decoration: underline;
+}
+.header {
+  background-color: #F1F1F1;
+  text-align: center;
+  padding: 20px;
+    /* position: fixed; */
+}
+.loading{
+  background-color: rgb(170, 160, 160);
+}
+
+.sidenav{
+    height: 100%; 
+  position: fixed;
+  min-width: 10px; 
+border-width: 0px ;
+  /* top:122px;  */
+ right: 10px;
+  background-color: rgb(195, 195, 195); 
+  overflow-x: hidden; 
+  margin:0px;
+  
+}
+.sidenav ul{
+margin: 0mm;
+}
+.sidenav li {
+  
+  padding: 3px 2px 2px 3px;
+  list-style: none;
+  color: #747171;
+}
+.sidenavlink{
+   padding-right: 10px;
+    
+}
+.form select{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  
+  
+}
+.form input{
+    width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.form button{
+    width: 100%;
+  background-color: rgb(27, 211, 140);
+  color: rgb(20, 20, 20);
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.form {
+    border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+/* The navbar container */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+    /* position: fixed; */
+}
+.loginbutton{
+  float:right;
+  padding:2px;
+  border: rgb(110, 110, 110);
+  border-style: solid;
+}
+/* Navbar links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Links - change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+
+
+
+
+/* Left and right column */
+.leftcolumn {
+  width: 75%;
+}
+
+/* Middle column */
+.rightcolumn {
+  float:right;
+  right:0;
+  width: 25%;
+  background-color: #f1f1f1;
+  padding-left: 20px;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.select-css {
+	/* display: block; */
+	font-size: 16px;
+	font-family: sans-serif;
+	font-weight: 700;
+	color:    #3a3335;
+	line-height: 1.3;
+	padding: .5em 1.4em .5em .5em;
+	/* width: 100%; */
+	/* max-width: 20%; */
+	box-sizing: border-box;
+	margin: 3vh;
+	border: 1px solid #aaa;
+	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+	border-radius: .5em;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: #e7e7e7;
+	background-image: url('https://i.imgur.com/mXI9Eu4.png'),
+	  linear-gradient(to bottom, #dadada 0%,#e6e6e6 100%);
+	background-repeat: no-repeat, repeat;
+	background-position: right .7em top 50%, 0 0;
+  background-size: .65em auto, 100%;
+  
+}
+.select-css::-ms-expand {
+	display: none;
+}
+.select-css:hover {
+  border-color: #888;
+ 
+  
+}
+.select-css:focus {
+	border-color: #aaa;
+	box-shadow: 0 0 1px 3px #252525;
+	box-shadow: 0 0 0 3px -moz-mac-focusring;
+	color:    #3a3335;
+	outline: none;
+}
+.select-css option {
+  font-weight:normal;
+  padding:30px;
+}

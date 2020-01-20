@@ -18,7 +18,7 @@ class Articles extends Component {
       return <ErrorMessages err={this.state.err} />;
     }
     return (
-      <main className="App">
+      <main >
         <SortingQueries
           handleSortChange={this.handleSortChange}
           sort_by={this.state.sort_by}
@@ -40,7 +40,7 @@ class Articles extends Component {
             topic
           </p>
         )}
-        <ul>
+        <ul className='articleslist'>
           {articles.map(article => {
             return (
               <li key={article.article_id}>
@@ -61,7 +61,7 @@ class Articles extends Component {
     );
   }
   componentDidMount() {
-    this.props.setTopic(this.props.topic)
+    if(this.props.topic){this.props.setTopic(this.props.topic)}
     getArticles(this.props.topic)
       .then(articles => this.setState({ articles: articles, isLoading: false }))
       .catch(err => {
@@ -78,7 +78,7 @@ class Articles extends Component {
       this.state.sort_by !== prevState.sort_by ||
       this.state.order !== prevState.order
     ) {
-      this.props.setTopic(this.props.topic)
+      if (this.props.topic){this.props.setTopic(this.props.topic)}
       getArticles(this.props.topic, this.state.sort_by, this.state.order).then(
         articles => {
           this.setState({ articles: articles, isLoading: false, err: null });

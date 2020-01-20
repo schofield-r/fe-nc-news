@@ -13,7 +13,7 @@ class MostPopular extends Component {
     if (this.state.err) {
       return <ErrorMessages err={this.state.err} />;
     }
-    return <ul>
+    return <ul className='articleslist'>
       {this.state.articles.map(article => {
         return (
           <li key={article.article_id} className=''>
