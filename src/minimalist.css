@@ -150,7 +150,7 @@ margin: 0mm;
   padding: 20px;
 }
 /* The navbar container */
-heroku create nc-news-rms -b https://github.com/mars/create-react-app-buildpack.git
+
 .topnav {
   overflow: hidden;
   background-color: #333;
