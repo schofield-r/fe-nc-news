@@ -4,6 +4,11 @@
 font-family: 'Exo 2', sans-serif;
 
 }
+.articleBox{
+      border-radius: 5px;
+  background-color: #dddddd;
+  padding: 20px;
+}
 .avatar {
   max-height: 100px;
   max-width: 100px;
@@ -21,6 +26,16 @@ display:grid;
   background-color: #dddddd;
   padding: 20px;
 
+}
+button{
+     /* width: 100%; */
+  background-color: rgb(121, 121, 121);
+  color: rgb(20, 20, 20);
+  padding: 14px 20px;
+  margin: 8px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer; 
 }
 .userslist ul{
 display:grid;
@@ -121,7 +136,7 @@ margin: 0mm;
 }
 .form button{
     width: 100%;
-  background-color: rgb(27, 211, 140);
+  background-color: rgb(184, 184, 184);
   color: rgb(20, 20, 20);
   padding: 14px 20px;
   margin: 8px 0;

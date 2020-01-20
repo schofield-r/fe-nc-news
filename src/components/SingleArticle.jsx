@@ -19,7 +19,7 @@ class SingleArticle extends Component {
       return <ErrorMessages err={this.state.err} />;
     }
     return (
-      <main>
+      <div>
         <div className="articleBox">
           <h2>{article.topic}</h2>
           <h3>{article.title}</h3>
@@ -44,7 +44,7 @@ class SingleArticle extends Component {
         <ViewToggler>
           <Comments article_id={this.props.article_id} user={this.props.user} />
         </ViewToggler>
-      </main>
+      </div>
     );
   }
   componentDidMount() {
