@@ -6,6 +6,7 @@ import ViewToggler from "./ViewToggler";
 import VoteUpdater from "./VoteUpdater";
 import Loading from "./Loading";
 import { navigate } from "@reach/router";
+import moment from 'moment'
 
 class SingleArticle extends Component {
   state = { article: [], isLoading: true, err: null };
@@ -25,7 +26,7 @@ class SingleArticle extends Component {
           <h3>{article.title}</h3>
           <p>{article.body}</p>
           <p>Author: {article.author}</p>
-          <p>Posted: {article.created_at}</p>
+          <p>Posted: {moment(article.created_at).format('MMMM Do YYYY, h:mm:ss a')}</p>
           {this.props.user === article.author  ? (
             <button onClick={this.deleteArticle} value={article.article_id}>
               Delete

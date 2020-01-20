@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "@reach/router";
 import VoteUpdater from "./VoteUpdater";
+import moment from "moment";
 
 const CommentCard = ({comments,user,deleteComment}) => {
   return (
@@ -10,9 +11,11 @@ const CommentCard = ({comments,user,deleteComment}) => {
           return (
             <li key={comment.comment_id}>
               {comment.body}
-              <br></br>Author : <Link to={`/users/${comment.author}`}>{comment.author}</Link>
+              <br></br>Author :{" "}
+              <Link to={`/users/${comment.author}`}>{comment.author}</Link>
               <br></br>CommentId: {comment.comment_id}
-              <br></br>
+              <br></br>Posted:{" "}
+              {moment(comment.created_at).format("MMMM Do YYYY, h:mm:ss a")}
               <VoteUpdater
                 type={"comments"}
                 id={comment.comment_id}
@@ -24,10 +27,10 @@ const CommentCard = ({comments,user,deleteComment}) => {
                   value={comment.comment_id}
                 >
                   Delete
-                  </button>
+                </button>
               ) : (
-                  <br></br>
-                )}
+                <br></br>
+              )}
             </li>
           );
         })}

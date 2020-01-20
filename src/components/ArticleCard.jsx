@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "@reach/router";
+import moment from "moment";
 
 const ArticleCard = ( {articles} ) => {   
   return (
@@ -16,7 +17,8 @@ const ArticleCard = ( {articles} ) => {
               <br></br>
               Comment Count : {article.comment_count}
               <br></br>
-              Date posted: {article.created_at}
+              Date posted: 
+              {moment(article.created_at).format('MMMM Do YYYY, h:mm:ss a')}
             </li>
           );
         })}
