@@ -3,6 +3,7 @@ import { getUser, getArticles } from "./Api";
 import ErrorMessages from "../components/ErrorMessages";
 import Loading from "./Loading";
 import { navigate, Link} from "@reach/router";
+import ArticleCard from "./ArticleCard";
 
 class UserProfile extends Component {
   state = { user: {},articles:[], isLoading: true, err: null };
@@ -21,9 +22,9 @@ class UserProfile extends Component {
         <img src={this.state.user.avatar_url} className="avatar" alt="avatar" />
         <h3>User Activity</h3>
         <h4>Articles</h4>
-//article carrddddd pleeease
 
-        <ul className='articleslist'>
+<ArticleCard articles={this.state.articles}/>
+        {/* <ul className='articleslist'>
           {this.state.articles.map(article => {
             return (
               <li key={article.article_id}>
@@ -39,7 +40,7 @@ class UserProfile extends Component {
               </li>
             );
           })}
-        </ul>
+        </ul> */}
       </div>
     );
   }

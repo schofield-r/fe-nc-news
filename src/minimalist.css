@@ -32,7 +32,7 @@ display:grid;
   display:grid;
 }
 
-.articleslist li{
+.cardlist li{
 list-style: none;
 /* border-width: 2px; */
 /* border-color: rgb(47, 47, 47); */

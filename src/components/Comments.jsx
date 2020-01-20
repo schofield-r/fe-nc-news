@@ -6,6 +6,7 @@ import ErrorMessages from "./ErrorMessages";
 import Loading from "./Loading";
 import SortingQueries from "./SortingQueries";
 import { Link } from "@reach/router";
+import CommentCard from "./CommentCard";
 
 class Comments extends Component {
   state = { comments: [], isLoading: true, sort_by: "", order: "", err: null };
@@ -34,7 +35,12 @@ class Comments extends Component {
             { name: "Votes", value: "votes" }
           ]}
         />
-        <ul>
+        <CommentCard
+          comments={this.state.comments}
+          user={this.props.user}
+          deleteComment={this.deleteComment}
+        />
+        {/* <ul>
           {this.state.comments.map(comment => {
             return (
               <li key={comment.comment_id}>
@@ -60,7 +66,7 @@ class Comments extends Component {
               </li>
             );
           })}
-        </ul>
+        </ul> */}
       </main>
     );
   }
@@ -82,11 +88,11 @@ class Comments extends Component {
       };
     });
   };
-  deleteComment = event => {
-    event.preventDefault();
-    deleteComment(event.target.value).then();
+  deleteComment = id => {
+    // event.preventDefault();
+    deleteComment(id).then();
     const modifiedComments = this.state.comments.filter(
-      comment => comment.comment_id !== Number(event.target.value)
+      comment => comment.comment_id !== Number(id)
     );
     this.setState({ comments: modifiedComments });
   };
@@ -95,7 +101,7 @@ class Comments extends Component {
     this.setState({ [name]: value });
   };
 
-  componentDidUpdate(prevProps,prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (
       this.state.sort_by !== prevState.sort_by ||
       this.state.order !== prevState.order
@@ -105,7 +111,7 @@ class Comments extends Component {
         this.state.sort_by,
         this.state.order
       ).then(comments =>
-        this.setState({ comments: comments, isLoading: false ,err:null})
+        this.setState({ comments: comments, isLoading: false, err: null })
       );
 
       console.log(this.state.order, this.state.sort_by);

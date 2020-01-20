@@ -5,6 +5,7 @@ import ErrorMessages from "../components/ErrorMessages";
 import Loading from "./Loading";
 import SortingQueries from "./SortingQueries";
 import NewArticle from "./NewArticle";
+import ArticleCard from "./ArticleCard";
 
 class Articles extends Component {
   state = { articles: [], isLoading: true, sort_by: "", order: "", err: null ,topic:''};
@@ -29,9 +30,6 @@ class Articles extends Component {
             { name: "Votes", value: "votes" }
           ]}
         />
-        {/* <Router >
-          <NewArticle path="/create-new-article" topic={this.state.stuff} />
-        </Router> */}
         <h2>{this.props.topic || "All Articles"}</h2>
         {!articles.length && (
           <p>
@@ -39,8 +37,8 @@ class Articles extends Component {
             <Link to="/create-new-article"> here </Link> to write one in this
             topic
           </p>
-        )}
-        <ul className='articleslist'>
+        )}<ArticleCard articles={this.state.articles}/>
+        {/* <ul className='articleslist'>
           {articles.map(article => {
             return (
               <li key={article.article_id}>
@@ -56,7 +54,7 @@ class Articles extends Component {
               </li>
             );
           })}
-        </ul>
+        </ul> */}
       </main>
     );
   }
