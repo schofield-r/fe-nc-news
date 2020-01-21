@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import { Link } from "@reach/router";
 import VoteUpdater from "./VoteUpdater";
 import moment from "moment";
 
-const CommentCard = ({comments,user,deleteComment}) => {
+const CommentCard = ({ comments, user, deleteComment }) => {
   return (
-    <div className='cardlist'>
+    <div className="cardlist">
       <ul>
         {comments.map(comment => {
           return (
@@ -24,7 +24,6 @@ const CommentCard = ({comments,user,deleteComment}) => {
               {user === comment.author ? (
                 <button
                   onClick={() => deleteComment(comment.comment_id)}
-                  value={comment.comment_id}
                 >
                   Delete
                 </button>

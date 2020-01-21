@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SubmitComment from "./SubmitComment";
 import VoteUpdater from "./VoteUpdater";
-import { deleteComment, getComments } from "./Api";
+import * as api from "./Api";
 import ErrorMessages from "./ErrorMessages";
 import Loading from "./Loading";
 import SortingQueries from "./SortingQueries";
@@ -40,38 +40,11 @@ class Comments extends Component {
           user={this.props.user}
           deleteComment={this.deleteComment}
         />
-        {/* <ul>
-          {this.state.comments.map(comment => {
-            return (
-              <li key={comment.comment_id}>
-                {comment.body}
-                <br></br>Author : <Link to={`/users/${comment.author}`}>{comment.author}</Link>
-                <br></br>CommentId: {comment.comment_id}
-                <br></br>
-                <VoteUpdater
-                  type={"comments"}
-                  id={comment.comment_id}
-                  votes={comment.votes}
-                />
-                {this.props.user === comment.author ? (
-                  <button
-                    onClick={this.deleteComment}
-                    value={comment.comment_id}
-                  >
-                    Delete
-                  </button>
-                ) : (
-                  <br></br>
-                )}
-              </li>
-            );
-          })}
-        </ul> */}
       </main>
     );
   }
   componentDidMount() {
-    getComments(this.props.article_id, this.state.sort_by, this.state.order)
+    api.getComments(this.props.article_id, this.state.sort_by, this.state.order)
       .then(comments => this.setState({ comments: comments, isLoading: false }))
       .catch(err => {
         this.setState({
@@ -89,13 +62,16 @@ class Comments extends Component {
     });
   };
   deleteComment = id => {
-    // event.preventDefault();
-    deleteComment(id).then();
-    const modifiedComments = this.state.comments.filter(
-      comment => comment.comment_id !== Number(id)
-    );
-    this.setState({ comments: modifiedComments });
+    api.deleteComment(id);
+    this.setState(currentState => {
+      return {
+        comments: currentState.comments.filter(
+          comment => comment.comment_id !== Number(id)
+        )
+      };
+    });
   };
+
   handleSortChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
@@ -106,15 +82,15 @@ class Comments extends Component {
       this.state.sort_by !== prevState.sort_by ||
       this.state.order !== prevState.order
     ) {
-      getComments(
-        this.props.article_id,
-        this.state.sort_by,
-        this.state.order
-      ).then(comments =>
-        this.setState({ comments: comments, isLoading: false, err: null })
-      );
-
-      console.log(this.state.order, this.state.sort_by);
+      api
+        .getComments(
+          this.props.article_id,
+          this.state.sort_by,
+          this.state.order
+        )
+        .then(comments =>
+          this.setState({ comments: comments, isLoading: false, err: null })
+        );
     }
   }
 }

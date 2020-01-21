@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { patchVotes } from "./Api";
+import * as api from "./Api";
 import Loading from "./Loading";
 import ErrorMessages from "./ErrorMessages";
 
@@ -45,19 +45,20 @@ class VoteUpdater extends Component {
     this.setState(currentState => {
       return { voteDiff: currentState.voteDiff + voteChange, isLoading: false };
     });
-    patchVotes(this.props.type, this.props.id, voteChange).catch(response => {
-      this.setState(currentState => {
-        return {
-          err: {
-            msg: response.response.data.msg,
-            status: response.response.status
-          },
-          voteDiff: currentState.voteDiff - this.state.voteDiff,
-          isLoading: false
-          /////
-        };
+    api
+      .patchVotes(this.props.type, this.props.id, voteChange)
+      .catch(response => {
+        this.setState(currentState => {
+          return {
+            err: {
+              msg: response.response.data.msg,
+              status: response.response.status
+            },
+            voteDiff: currentState.voteDiff - this.state.voteDiff,
+            isLoading: false
+          };
+        });
       });
-    });
   };
 }
 

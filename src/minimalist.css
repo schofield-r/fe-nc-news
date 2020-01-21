@@ -197,11 +197,11 @@ margin: 0mm;
 }
 
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   .column {
     width: 100%;
   }
-}
+} */
 
 .select-css {
 	/* display: block; */
@@ -247,4 +247,10 @@ margin: 0mm;
 .select-css option {
   font-weight:normal;
   padding:30px;
+}
+@media (max-width: 500px) {
+  .main, header,  .sidenav,.cardlist {
+    display: flex;
+    flex-direction: column;
+  }
 }

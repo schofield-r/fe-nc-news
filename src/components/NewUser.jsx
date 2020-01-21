@@ -59,14 +59,6 @@ class NewUser extends Component {
       .postUser(username, name, avatar_url)
       .then(user => {
         this.props.setUser(user);
-        this.setState({
-          username: user.username,
-          name: "",
-          avatar_url: "",
-          isLoading: false,
-          err: null,
-          created: true
-        });
         navigate(`/users/${user.username}`);
       })
       .catch(err => {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import "./App.css";
-import './minimalist.css'
+import "./minimalist.css";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import { Router } from "@reach/router";
@@ -17,7 +17,7 @@ import LogInPage from "./components/LogInPage";
 import NewArticle from "./components/NewArticle";
 
 class App extends Component {
-  state = { user: {}, topicsAdded: false ,topic:''};
+  state = { user: {}, topicsAdded: false, topic: "" };
   render() {
     return (
       <main className="main">
@@ -76,13 +76,13 @@ class App extends Component {
   setUser = newUser => {
     this.setState({ user: newUser });
   };
-  updateTopics = (val) => {
-   this.setState({topicsAdded:val})
+  updateTopics = val => {
+    this.setState({ topicsAdded: val });
   };
-  setTopic=(val)=>{
-    this.setState({topic:val})
-    console.log(this.state.topic)
-  }
+  setTopic = val => {
+    this.setState({ topic: val });
+    console.log(this.state.topic);
+  };
 }
 
 export default App;

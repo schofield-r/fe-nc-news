@@ -1,14 +1,20 @@
 import React, { Component } from "react";
-import { getArticles } from "./Api";
-import { Link, Router } from "@reach/router";
+import * as api from "./Api";
+import { Link } from "@reach/router";
 import ErrorMessages from "../components/ErrorMessages";
 import Loading from "./Loading";
 import SortingQueries from "./SortingQueries";
-import NewArticle from "./NewArticle";
 import ArticleCard from "./ArticleCard";
 
 class Articles extends Component {
-  state = { articles: [], isLoading: true, sort_by: "", order: "", err: null ,topic:''};
+  state = {
+    articles: [],
+    isLoading: true,
+    sort_by: "",
+    order: "",
+    err: null,
+    topic: ""
+  };
 
   render() {
     const { articles } = this.state;
@@ -19,7 +25,7 @@ class Articles extends Component {
       return <ErrorMessages err={this.state.err} />;
     }
     return (
-      <main >
+      <main>
         <SortingQueries
           handleSortChange={this.handleSortChange}
           sort_by={this.state.sort_by}
@@ -37,30 +43,16 @@ class Articles extends Component {
             <Link to="/create-new-article"> here </Link> to write one in this
             topic
           </p>
-        )}<ArticleCard articles={this.state.articles}/>
-        {/* <ul className='articleslist'>
-          {articles.map(article => {
-            return (
-              <li key={article.article_id}>
-                <Link to={`/articles/${article.article_id}`}>
-                  {article.title}
-                  <br></br>
-                </Link>
-                Votes:{article.votes}
-                <br></br>
-                Comment Count : {article.comment_count}
-                <br></br>
-                Date posted: {article.created_at}
-              </li>
-            );
-          })}
-        </ul> */}
+        )}
+        <ArticleCard articles={this.state.articles} />
       </main>
     );
   }
   componentDidMount() {
-    if(this.props.topic){this.props.setTopic(this.props.topic)}
-    getArticles(this.props.topic)
+    if (this.props.topic) {
+      this.props.setTopic(this.props.topic);
+    }
+    api.getArticles(this.props.topic)
       .then(articles => this.setState({ articles: articles, isLoading: false }))
       .catch(err => {
         console.log(err, "err");
@@ -76,7 +68,9 @@ class Articles extends Component {
       this.state.sort_by !== prevState.sort_by ||
       this.state.order !== prevState.order
     ) {
-      if (this.props.topic){this.props.setTopic(this.props.topic)}
+      if (this.props.topic) {
+        this.props.setTopic(this.props.topic);
+      }
       getArticles(this.props.topic, this.state.sort_by, this.state.order).then(
         articles => {
           this.setState({ articles: articles, isLoading: false, err: null });

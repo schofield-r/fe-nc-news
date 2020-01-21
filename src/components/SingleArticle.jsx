@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { getSingleArticle, deleteArticle } from "./Api";
+import * as api from "./Api";
 import ErrorMessages from "./ErrorMessages";
 import Comments from "./Comments";
 import ViewToggler from "./ViewToggler";
 import VoteUpdater from "./VoteUpdater";
 import Loading from "./Loading";
 import { navigate } from "@reach/router";
-import moment from 'moment'
+import moment from "moment";
 
 class SingleArticle extends Component {
   state = { article: [], isLoading: true, err: null };
@@ -26,8 +26,11 @@ class SingleArticle extends Component {
           <h3>{article.title}</h3>
           <p>{article.body}</p>
           <p>Author: {article.author}</p>
-          <p>Posted: {moment(article.created_at).format('MMMM Do YYYY, h:mm:ss a')}</p>
-          {this.props.user === article.author  ? (
+          <p>
+            Posted:{" "}
+            {moment(article.created_at).format("MMMM Do YYYY, h:mm:ss a")}
+          </p>
+          {this.props.user === article.author ? (
             <button onClick={this.deleteArticle} value={article.article_id}>
               Delete
             </button>
@@ -49,7 +52,8 @@ class SingleArticle extends Component {
     );
   }
   componentDidMount() {
-    getSingleArticle(this.props.article_id)
+    api
+      .getSingleArticle(this.props.article_id)
       .then(article => {
         this.setState({ article: article, isLoading: false });
       })
@@ -62,8 +66,8 @@ class SingleArticle extends Component {
   }
   deleteArticle = event => {
     event.preventDefault();
-    deleteArticle(event.target.value);
-    console.log('deleted')
+    api.deleteArticle(event.target.value);
+    console.log("deleted");
     navigate(`/articles/topics/${this.state.article.topic}`);
   };
 }

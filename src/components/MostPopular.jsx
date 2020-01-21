@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getArticles } from "./Api";
+import * as api from "./Api";
 import { Link } from "@reach/router";
 import ErrorMessages from "./ErrorMessages";
 import Loading from "./Loading";
@@ -33,7 +33,8 @@ class MostPopular extends Component {
   }
   
   componentDidMount() { 
-    getArticles(null, 'votes','desc')
+    api
+      .getArticles(null, "votes", "desc")
       .then(articles => this.setState({ articles: articles, isLoading: false }))
       .catch(err => {
         console.log(err);

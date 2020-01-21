@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getUser, getArticles } from "./Api";
+import * as api from "./Api";
 import ErrorMessages from "../components/ErrorMessages";
 import Loading from "./Loading";
 import { navigate, Link} from "@reach/router";
@@ -24,23 +24,6 @@ class UserProfile extends Component {
         <h4>Articles</h4>
 
 <ArticleCard articles={this.state.articles}/>
-        {/* <ul className='articleslist'>
-          {this.state.articles.map(article => {
-            return (
-              <li key={article.article_id}>
-                <Link to={`/articles/${article.article_id}`}>
-                  {article.title}
-                  <br></br>
-                </Link>
-                Votes:{article.votes}
-                <br></br>
-                Comment Count : {article.comment_count}
-                <br></br>
-                Date posted: {article.created_at}
-              </li>
-            );
-          })}
-        </ul> */}
       </div>
     );
   }
@@ -55,7 +38,7 @@ class UserProfile extends Component {
     }
   }
   getUserData = () => {
-    getUser(this.props.username)
+    api.getUser(this.props.username)
       .then(user => {
         this.setState({ user: user});
       })
@@ -65,9 +48,10 @@ class UserProfile extends Component {
           isLoading: false
         });
       });
-    getArticles('', '', '', this.props.username).then(articles => {
-      this.setState({ articles: articles, isLoading: false });
-    })
+    api.getArticles(null, null, null, this.props.username)
+      .then(articles => {
+        this.setState({ articles: articles, isLoading: false });
+      })
       .catch(err => {
         this.setState({
           err: { msg: err.response.data.msg, status: err.response.status },

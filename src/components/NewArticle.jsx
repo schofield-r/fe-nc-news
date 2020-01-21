@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Link, navigate } from "@reach/router";
-import { getTopics, postArticle } from "./Api";
+import * as api from "./Api";
 import LogInPage from "./LogInPage";
 
 class NewArticle extends Component {
-  state = { topics: [], body: "", title: "", selectedTopic: "", i: null };
+  state = { topics: [], body: "", title: "", selectedTopic: ""};
   render() {
     if (!this.props.username) {
       return (
@@ -49,7 +49,7 @@ class NewArticle extends Component {
           <p>topic:{this.state.selectedTopic}</p>
           {/* <p>
             Description:
-            {this.indexFinder()}
+            {}
           </p> */}
           <label htmlFor="title">Title:</label>
           <input
@@ -75,7 +75,7 @@ class NewArticle extends Component {
     const { title, body } = this.state;
     const author = this.props.username;
     const topic = this.state.selectedTopic;
-    postArticle(title, topic, author, body)
+   api. postArticle(title, topic, author, body)
       .then(article => {
         navigate(`/articles/${article.article_id}`);
       })
@@ -92,25 +92,11 @@ class NewArticle extends Component {
   };
   componentDidMount() {
     this.setState({ selectedTopic: this.props.topic });
-    getTopics().then(topics => {
+    api.getTopics().then(topics => {
       this.setState({ topics: topics });
-      // let i = topics.findIndex(
-      //   topic => topic.slug === this.state.selectedTopic
-      // );
-      // {
-      //   this.setState({ topicIndex: i });
-      // }
     });
-    // console.log(this.indexFinder(), "index");
-    // console.log(this.state.topics[0], "index of topic");
  }
-  // indexFinder = () => {
-  //   let topics = this.state.topics;
-  //   console.log(topics);
-  //   let selectedTopic = this.state.selectedTopic;
-  //   let i = topics.findIndex(topic => topic.slug === selectedTopic);
-  //   return i;
-  // };
+
 }
 
 export default NewArticle;

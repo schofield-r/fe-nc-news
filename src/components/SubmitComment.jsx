@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { postComment } from "./Api";
+import * as api from "./Api";
 import ErrorMessages from "./ErrorMessages";
 import Loading from "./Loading";
 
@@ -33,7 +33,8 @@ class SubmitComment extends Component {
   
   handleSubmit = event => {
     event.preventDefault();
-    postComment(this.props.article_id, this.props.user, this.state.body)
+    api
+      .postComment(this.props.article_id, this.props.user, this.state.body)
       .then(comment => {
         this.props.addComment(comment);
         this.setState({ username: "", body: "" });

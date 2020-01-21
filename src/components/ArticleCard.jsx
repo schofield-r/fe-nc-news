@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import { Link } from "@reach/router";
 import moment from "moment";
 
-const ArticleCard = ( {articles} ) => {   
+const ArticleCard = ({ articles }) => {
   return (
     <div>
-      <ul className='cardlist'>
+      <ul className="cardlist">
         {articles.map(article => {
           return (
             <li key={article.article_id}>
@@ -17,8 +17,8 @@ const ArticleCard = ( {articles} ) => {
               <br></br>
               Comment Count : {article.comment_count}
               <br></br>
-              Date posted: 
-              {moment(article.created_at).format('MMMM Do YYYY, h:mm:ss a')}
+              Date posted:
+              {moment(article.created_at).format("MMMM Do YYYY, h:mm:ss a")}
             </li>
           );
         })}
