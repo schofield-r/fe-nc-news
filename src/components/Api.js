@@ -26,7 +26,6 @@ export const patchVotes = (type, id, voteChange) => {
   return Axios.patch(`${baseURL}/${type}/${id}`, {
     inc_votes: voteChange
   }).then(({ data }) => {
-    console.log(data);
     return data;
   });
 };

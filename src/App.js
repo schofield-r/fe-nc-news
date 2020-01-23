@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import "./App.css";
 import "./minimalist.css";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
@@ -17,7 +16,7 @@ import LogInPage from "./components/LogInPage";
 import NewArticle from "./components/NewArticle";
 
 class App extends Component {
-  state = { user: {}, topicsAdded: false, topic: "" };
+  state = { user: {}, topicsAdded: false };
   render() {
     return (
       <main className="main">
@@ -43,7 +42,9 @@ class App extends Component {
               username={this.state.user.username}
               setUser={this.setUser}
             />
-            <Articles path="/articles/topics/:topic" setTopic={this.setTopic} />
+            <Articles
+              path="/articles/topics/:topic"
+            />
             <Articles path="/articles" />
             <MostPopular path="/feature-articles/:feature" />
             <SingleArticle
@@ -59,7 +60,6 @@ class App extends Component {
             <NewUser path="/create-new-user" setUser={this.setUser} />
             <NewArticle
               path="/create-new-article"
-              topic={this.state.topic}
               username={this.state.user.username}
               setUser={this.setUser}
             />
@@ -78,10 +78,6 @@ class App extends Component {
   };
   updateTopics = val => {
     this.setState({ topicsAdded: val });
-  };
-  setTopic = val => {
-    this.setState({ topic: val });
-    console.log(this.state.topic);
   };
 }
 

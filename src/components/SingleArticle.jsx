@@ -67,7 +67,6 @@ class SingleArticle extends Component {
   deleteArticle = event => {
     event.preventDefault();
     api.deleteArticle(event.target.value);
-    console.log("deleted");
     navigate(`/articles/topics/${this.state.article.topic}`);
   };
 }

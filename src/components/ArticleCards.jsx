@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "@reach/router";
 import moment from "moment";
 
-const ArticleCard = ({ articles }) => {
+const ArticleCards = ({ articles }) => {
   return (
     <div>
       <ul className="cardlist">
@@ -27,4 +27,4 @@ const ArticleCard = ({ articles }) => {
   );
 };
 
-export default ArticleCard;
+export default ArticleCards;

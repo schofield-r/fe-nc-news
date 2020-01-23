@@ -28,7 +28,6 @@ class Users extends Component {
       .getUsers()
       .then(users => this.setState({ users: users, isLoading: false }))
       .catch(err => {
-        console.log(err);
         this.setState({
           err: { msg: err.response.data.msg, status: err.response.status },
           isLoading: false

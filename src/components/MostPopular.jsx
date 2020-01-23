@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as api from "./Api";
 import ErrorMessages from "./ErrorMessages";
 import Loading from "./Loading";
-import ArticleCard from "./ArticleCard";
+import ArticleCard from "./ArticleCards";
 
 class MostPopular extends Component {
   state = { articles: [], isLoading: true, err: null };
@@ -21,7 +21,6 @@ class MostPopular extends Component {
       .getArticles(null, "votes", "desc")
       .then(articles => this.setState({ articles: articles, isLoading: false }))
       .catch(err => {
-        console.log(err);
         this.setState({
           err: { msg: err.response.data.msg, status: err.response.status },
           isLoading: false

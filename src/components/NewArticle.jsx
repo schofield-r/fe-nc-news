@@ -4,7 +4,13 @@ import * as api from "./Api";
 import LogInPage from "./LogInPage";
 
 class NewArticle extends Component {
-  state = { topics: [], body: "", title: "", selectedTopic: ""};
+  state = {
+    topics: [],
+    body: "",
+    title: "",
+    selectedTopic: "",
+    topicDescription: ""
+  };
   render() {
     if (!this.props.username) {
       return (
@@ -31,8 +37,10 @@ class NewArticle extends Component {
             onChange={this.handleChange}
             required
           >
-            {this.state.selectedTopic.length ? (
-              <option>{this.state.selectedTopic}</option>
+            {this.props.location.state.topic.length ? (
+              <option value={this.props.location.state.topic}>
+                {this.props.location.state.topic}
+              </option>
             ) : (
               <option disabled value="">
                 Choose Topic
@@ -46,11 +54,13 @@ class NewArticle extends Component {
               );
             })}
           </select>
-          <p>topic:{this.state.selectedTopic}</p>
-          {/* <p>
+          <p>
+            topic:{this.state.selectedTopic || this.props.location.state.topic}
+          </p>
+          <p>
             Description:
-            {}
-          </p> */}
+            {this.state.topicDescription}
+          </p>
           <label htmlFor="title">Title:</label>
           <input
             onChange={this.handleChange}
@@ -75,7 +85,8 @@ class NewArticle extends Component {
     const { title, body } = this.state;
     const author = this.props.username;
     const topic = this.state.selectedTopic;
-   api. postArticle(title, topic, author, body)
+    api
+      .postArticle(title, topic, author, body)
       .then(article => {
         navigate(`/articles/${article.article_id}`);
       })
@@ -87,16 +98,27 @@ class NewArticle extends Component {
       });
   };
   handleChange = event => {
-    const {name,value} = event.target
-    this.setState({ [name]: value });
+    const { name, value } = event.target;
+    if (name === "selectedTopic") {
+      this.setDescription(value);
+      this.setState({ selectedTopic: value });
+    } else this.setState({ [name]: value });
   };
   componentDidMount() {
-    this.setState({ selectedTopic: this.props.topic });
+    this.setState({ selectedTopic: this.props.location.state.topic });
     api.getTopics().then(topics => {
       this.setState({ topics: topics });
+      this.setDescription(this.props.location.state.topic);
     });
- }
-
+  }
+  setDescription = topicVal => {
+    let filteredTopic = this.state.topics.find(
+      topic => topic.slug === topicVal
+    );
+    this.setState({
+      topicDescription: filteredTopic.description
+    });
+  };
 }
 
 export default NewArticle;

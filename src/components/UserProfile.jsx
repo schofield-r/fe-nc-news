@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import * as api from "./Api";
 import ErrorMessages from "../components/ErrorMessages";
 import Loading from "./Loading";
-import { navigate, Link} from "@reach/router";
-import ArticleCard from "./ArticleCard";
+import { navigate } from "@reach/router";
+import ArticleCard from "./ArticleCards";
 
 class UserProfile extends Component {
-  state = { user: {},articles:[], isLoading: true, err: null };
+  state = { user: {}, articles: [], isLoading: true, err: null };
   render() {
     const { user } = this.state;
     if (this.state.isLoading) {
@@ -23,7 +23,7 @@ class UserProfile extends Component {
         <h3>User Activity</h3>
         <h4>Articles</h4>
 
-<ArticleCard articles={this.state.articles}/>
+        <ArticleCard articles={this.state.articles} />
       </div>
     );
   }
@@ -38,9 +38,10 @@ class UserProfile extends Component {
     }
   }
   getUserData = () => {
-    api.getUser(this.props.username)
+    api
+      .getUser(this.props.username)
       .then(user => {
-        this.setState({ user: user});
+        this.setState({ user: user });
       })
       .catch(err => {
         this.setState({
@@ -48,7 +49,8 @@ class UserProfile extends Component {
           isLoading: false
         });
       });
-    api.getArticles(null, null, null, this.props.username)
+    api
+      .getArticles(null, null, null, this.props.username)
       .then(articles => {
         this.setState({ articles: articles, isLoading: false });
       })

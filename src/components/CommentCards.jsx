@@ -3,7 +3,7 @@ import { Link } from "@reach/router";
 import VoteUpdater from "./VoteUpdater";
 import moment from "moment";
 
-const CommentCard = ({ comments, user, deleteComment }) => {
+const CommentCards = ({ comments, user, deleteComment }) => {
   return (
     <div className="cardlist">
       <ul>
@@ -38,4 +38,4 @@ const CommentCard = ({ comments, user, deleteComment }) => {
   );
 };
 
-export default CommentCard;
+export default CommentCards;

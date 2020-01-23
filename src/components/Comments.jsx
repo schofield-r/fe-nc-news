@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import SubmitComment from "./SubmitComment";
-import VoteUpdater from "./VoteUpdater";
 import * as api from "./Api";
 import ErrorMessages from "./ErrorMessages";
 import Loading from "./Loading";
 import SortingQueries from "./SortingQueries";
-import { Link } from "@reach/router";
-import CommentCard from "./CommentCard";
+import CommentCards from "./CommentCards";
 
 class Comments extends Component {
   state = { comments: [], isLoading: true, sort_by: "", order: "", err: null };
@@ -35,7 +33,7 @@ class Comments extends Component {
             { name: "Votes", value: "votes" }
           ]}
         />
-        <CommentCard
+        <CommentCards
           comments={this.state.comments}
           user={this.props.user}
           deleteComment={this.deleteComment}

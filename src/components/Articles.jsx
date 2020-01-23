@@ -4,7 +4,7 @@ import { Link } from "@reach/router";
 import ErrorMessages from "../components/ErrorMessages";
 import Loading from "./Loading";
 import SortingQueries from "./SortingQueries";
-import ArticleCard from "./ArticleCard";
+import ArticleCards from "./ArticleCards";
 
 class Articles extends Component {
   state = {
@@ -40,22 +40,18 @@ class Articles extends Component {
         {!articles.length && (
           <p>
             There are no articles in this topic, click
-            <Link to="/create-new-article"> here </Link> to write one in this
+            <Link to="/create-new-article" state={{ topic: this.props.topic }}> here </Link> to write one in this
             topic
           </p>
         )}
-        <ArticleCard articles={this.state.articles} />
+        <ArticleCards articles={this.state.articles} />
       </main>
     );
   }
   componentDidMount() {
-    if (this.props.topic) {
-      this.props.setTopic(this.props.topic);
-    }
     api.getArticles(this.props.topic)
       .then(articles => this.setState({ articles: articles, isLoading: false }))
       .catch(err => {
-        console.log(err, "err");
         this.setState({
           err: { msg: err.response.data.msg, status: err.response.status },
           isLoading: false
@@ -68,10 +64,7 @@ class Articles extends Component {
       this.state.sort_by !== prevState.sort_by ||
       this.state.order !== prevState.order
     ) {
-      if (this.props.topic) {
-        this.props.setTopic(this.props.topic);
-      }
-      getArticles(this.props.topic, this.state.sort_by, this.state.order).then(
+      api.getArticles(this.props.topic, this.state.sort_by, this.state.order).then(
         articles => {
           this.setState({ articles: articles, isLoading: false, err: null });
         }
