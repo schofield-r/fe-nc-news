@@ -7,16 +7,17 @@ import ArticleCard from "./ArticleCards";
 class MostPopular extends Component {
   state = { articles: [], isLoading: true, err: null };
   render() {
-    if (this.state.isLoading) {
+    const { articles, isLoading, err } = this.state;
+    if (isLoading) {
       return <Loading />;
     }
-    if (this.state.err) {
-      return <ErrorMessages err={this.state.err} />;
+    if (err) {
+      return <ErrorMessages err={err} />;
     }
-    return <ArticleCard articles={this.state.articles}/>
+    return <ArticleCard articles={articles} />;
   }
-  
-  componentDidMount() { 
+
+  componentDidMount() {
     api
       .getArticles(null, "votes", "desc")
       .then(articles => this.setState({ articles: articles, isLoading: false }))

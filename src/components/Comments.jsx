@@ -9,40 +9,45 @@ import CommentCards from "./CommentCards";
 class Comments extends Component {
   state = { comments: [], isLoading: true, sort_by: "", order: "", err: null };
   render() {
-    if (this.state.isLoading) {
+    const { comments, isLoading, sort_by, order, err } = this.state;
+    const { user, article_id } = this.props;
+
+    if (isLoading) {
       return <Loading />;
     }
-    if (this.state.err) {
-      return <ErrorMessages err={this.state.err} />;
+    if (err) {
+      return <ErrorMessages err={err} />;
     }
     return (
       <main>
         {this.props.user && (
           <SubmitComment
-            article_id={this.props.article_id}
+            article_id={article_id}
             addComment={this.addComment}
-            user={this.props.user}
+            user={user}
           />
         )}
         <SortingQueries
           handleSortChange={this.handleSortChange}
-          sort_by={this.state.sort_by}
-          order={this.state.order}
+          sort_by={sort_by}
+          order={order}
           searchByOptions={[
             { name: "Date", value: "created_at" },
             { name: "Votes", value: "votes" }
           ]}
         />
         <CommentCards
-          comments={this.state.comments}
-          user={this.props.user}
+          comments={comments}
+          user={user}
           deleteComment={this.deleteComment}
         />
       </main>
     );
   }
   componentDidMount() {
-    api.getComments(this.props.article_id, this.state.sort_by, this.state.order)
+    const { sort_by, order } = this.state;
+    api
+      .getComments(this.props.article_id, sort_by, order)
       .then(comments => this.setState({ comments: comments, isLoading: false }))
       .catch(err => {
         this.setState({
@@ -76,16 +81,10 @@ class Comments extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (
-      this.state.sort_by !== prevState.sort_by ||
-      this.state.order !== prevState.order
-    ) {
+    const { sort_by, order } = this.state;
+    if (sort_by !== prevState.sort_by || order !== prevState.order) {
       api
-        .getComments(
-          this.props.article_id,
-          this.state.sort_by,
-          this.state.order
-        )
+        .getComments(this.props.article_id, sort_by, order)
         .then(comments =>
           this.setState({ comments: comments, isLoading: false, err: null })
         );

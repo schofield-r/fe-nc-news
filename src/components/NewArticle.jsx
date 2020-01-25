@@ -12,15 +12,13 @@ class NewArticle extends Component {
     topicDescription: ""
   };
   render() {
-    if (!this.props.username) {
+    const { selectedTopic, topics, topicDescription, title, body } = this.state;
+    const { username, setUser, location } = this.props;
+    if (!username) {
       return (
         <>
           <p>Please log in to post an article </p>
-          <LogInPage
-            path="/login"
-            username={this.props.username}
-            setUser={this.props.setUser}
-          />
+          <LogInPage path="/login" username={username} setUser={setUser} />
         </>
       );
     }
@@ -33,20 +31,20 @@ class NewArticle extends Component {
         <form onSubmit={this.handleSubmit}>
           <select
             name="selectedTopic"
-            value={this.state.selectedTopic}
+            value={selectedTopic}
             onChange={this.handleChange}
             required
           >
-            {this.props.location.state.topic.length ? (
-              <option value={this.props.location.state.topic}>
-                {this.props.location.state.topic}
+            {location.state.topic ? (
+              <option value={location.state.topic}>
+                {location.state.topic}
               </option>
             ) : (
               <option disabled value="">
                 Choose Topic
               </option>
             )}
-            {this.state.topics.map(topic => {
+            {topics.map(topic => {
               return (
                 <option key={topic.slug} value={topic.slug}>
                   {topic.slug}
@@ -54,25 +52,23 @@ class NewArticle extends Component {
               );
             })}
           </select>
-          <p>
-            topic:{this.state.selectedTopic || this.props.location.state.topic}
-          </p>
+          <p>topic:{selectedTopic || location.state.topic}</p>
           <p>
             Description:
-            {this.state.topicDescription}
+            {topicDescription}
           </p>
           <label htmlFor="title">Title:</label>
           <input
             onChange={this.handleChange}
             name="title"
-            value={this.state.title}
+            value={title}
             required
           ></input>
           <label htmlFor="body">Article:</label>
           <input
             onChange={this.handleChange}
             name="body"
-            value={this.state.body}
+            value={body}
             required
           ></input>
           <button>Post Article</button>
@@ -105,10 +101,13 @@ class NewArticle extends Component {
     } else this.setState({ [name]: value });
   };
   componentDidMount() {
-    this.setState({ selectedTopic: this.props.location.state.topic });
+    const { location } = this.props;
     api.getTopics().then(topics => {
       this.setState({ topics: topics });
-      this.setDescription(this.props.location.state.topic);
+      if (location.state.topic) {
+        this.setState({ selectedTopic: location.state.topic });
+        this.setDescription(location.state.topic);
+      }
     });
   }
   setDescription = topicVal => {

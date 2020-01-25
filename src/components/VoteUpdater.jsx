@@ -6,20 +6,21 @@ import ErrorMessages from "./ErrorMessages";
 class VoteUpdater extends Component {
   state = { voteDiff: 0, err: null, isLoading: true };
   render() {
-    if (this.state.isLoading && this.state.voteDiff !== 0) {
+    const{isLoading,err,voteDiff}=this.state
+    if (isLoading && voteDiff !== 0) {
       return <Loading />;
     }
-    if (this.state.err) {
-      return <ErrorMessages err={this.state.err} />;
+    if (err) {
+      return <ErrorMessages err={err} />;
     }
     return (
       <section>
-        <p>Votes: {this.props.votes + this.state.voteDiff}</p>
+        <p>Votes: {this.props.votes + voteDiff}</p>
         <button className="btn"
           id="button"
           onClick={() => this.handleVote(1)}
           value={1}
-          disabled={this.upvoteEnabling(this.state.voteDiff)}
+          disabled={this.upvoteEnabling(voteDiff)}
         >
           Upvote
         </button>
@@ -27,7 +28,7 @@ class VoteUpdater extends Component {
           className="btn"
           onClick={() => this.handleVote(-1)}
           value={-1}
-          disabled={this.downvoteEnabling(this.state.voteDiff)}
+          disabled={this.downvoteEnabling(voteDiff)}
         >
           Downvote
         </button>
@@ -47,12 +48,12 @@ class VoteUpdater extends Component {
     });
     api
       .patchVotes(this.props.type, this.props.id, voteChange)
-      .catch(response => {
+      .catch(err => {
         this.setState(currentState => {
           return {
             err: {
-              msg: response.response.data.msg,
-              status: response.response.status
+              msg: err.response.data.msg,
+              status: err.response.status
             },
             voteDiff: currentState.voteDiff - this.state.voteDiff,
             isLoading: false

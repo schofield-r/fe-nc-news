@@ -5,16 +5,17 @@ import { Link } from "@reach/router";
 class LogInPage extends Component {
   state = { username: "", user: {}, loggedIn: false, users: [] };
   render() {
-    const { users } = this.state;
-    return (<div className='form'>
-      <section className='login'>
-        {this.state.loggedIn ? (
+    const { users,user,loggedIn,username } = this.state;
+    return (
+    // <div className='form'>
+      <section className='form'>
+        {loggedIn ? (
           <>
-            <p>You are now logged in as {this.state.user.username}</p>
-            <p>Name: {this.state.user.name}</p>
+            <p>You are now logged in as {user.username}</p>
+            <p>Name: {user.name}</p>
 
             <img
-              src={this.state.user.avatar_url}
+              src={user.avatar_url}
               className="avatar"
               alt="avatar"
             />
@@ -25,7 +26,7 @@ class LogInPage extends Component {
             <h4>Please Log in to comment</h4>
             <form onSubmit={this.handleLogin}>
               <select
-                value={this.state.username}
+                value={username}
                 onChange={this.handleChange}
                 class="form"
                 required
@@ -47,7 +48,7 @@ class LogInPage extends Component {
               <p>or </p><Link to='/create-new-user'>create new user</Link>
           </>
         )}
-      </section></div>
+      </section>
     );
   }
 

@@ -5,13 +5,14 @@ import Loading from "./Loading";
 import { navigate } from "@reach/router";
 
 class TopicForm extends Component {
-  state = { slug: "", description: "", err: null };
+  state = { slug: "", description: "", err: null, isLoading: true };
   render() {
-    // if (this.state.isLoading) {
-    //   return <Loading />;
-    // }
-    if (this.state.err) {
-      return <ErrorMessages err={this.state.err} />;
+    const { slug, description, isLoading, err } = this.state;
+    if (isLoading) {
+      return <Loading />;
+    }
+    if (err) {
+      return <ErrorMessages err={err} />;
     }
     return (
       <form onSubmit={this.handleSubmit} className="form">
@@ -20,19 +21,22 @@ class TopicForm extends Component {
         <input
           onChange={this.handleChange}
           name="slug"
-          value={this.state.slug}
+          value={slug}
           required
         ></input>
         <label htmlFor="description ">Description :</label>
         <input
           onChange={this.handleChange}
           name="description"
-          value={this.state.description}
+          value={description}
           required
         ></input>
         <button>Create Topic</button>
       </form>
     );
+  }
+  componentDidMount() {
+    this.setState({ isLoading: false });
   }
 
   handleChange = event => {
@@ -42,16 +46,17 @@ class TopicForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    const { slug, description } = this.state;
     api
-      .postTopic(this.state.slug, this.state.description)
+      .postTopic(slug, description)
       .then(topic => {
         this.props.updateTopics(true);
         navigate(`/articles/topics/${topic.slug}`);
       })
       .catch(err => {
         this.setState({
-          err: { msg: err.response.data.msg, status: err.response.status }
-          // isLoading: false
+          err: { msg: err.response.data.msg, status: err.response.status },
+          isLoading: false
         });
       });
   };

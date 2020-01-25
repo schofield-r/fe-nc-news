@@ -8,22 +8,22 @@ import ArticleCard from "./ArticleCards";
 class UserProfile extends Component {
   state = { user: {}, articles: [], isLoading: true, err: null };
   render() {
-    const { user } = this.state;
-    if (this.state.isLoading) {
+    const { user,isLoading,articles,err } = this.state;
+    if (isLoading) {
       return <Loading />;
     }
-    if (this.state.err) {
-      return <ErrorMessages err={this.state.err} />;
+    if (err) {
+      return <ErrorMessages err={err} />;
     }
     return (
       <div>
-        <p>{this.state.user.username}</p>
-        <p>{this.state.user.name}</p>
-        <img src={this.state.user.avatar_url} className="avatar" alt="avatar" />
+        <p>{user.username}</p>
+        <p>{user.name}</p>
+        <img src={user.avatar_url} className="avatar" alt="avatar" />
         <h3>User Activity</h3>
         <h4>Articles</h4>
 
-        <ArticleCard articles={this.state.articles} />
+        <ArticleCard articles={articles} />
       </div>
     );
   }

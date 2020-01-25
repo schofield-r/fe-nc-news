@@ -7,20 +7,23 @@ import Loading from "./Loading";
 class Users extends Component {
   state = { users: [], isLoading: true, err: null };
   render() {
-    // const { users } = this.state;
-    if (this.state.isLoading) {
+    const { users, isLoading, err } = this.state;
+    if (isLoading) {
       return <Loading />;
     }
-    if (this.state.err) {
-      return <ErrorMessages err={this.state.err} />;
+    if (err) {
+      return <ErrorMessages err={err} />;
     }
     return (
-      <div className='userslist' ><ul>
-        {this.state.users.map(user => {
-          return <li><Link to={`/users/${user.username}`}>{user.username}</Link></li>
-        })}</ul>
-        
-      </div>
+      <ul className="userslist">
+        {users.map(user => {
+          return (
+            <li>
+              <Link to={`/users/${user.username}`}>{user.username}</Link>
+            </li>
+          );
+        })}
+      </ul>
     );
   }
   componentDidMount() {

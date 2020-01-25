@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./minimalist.css";
+import { Router } from "@reach/router";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
-import { Router } from "@reach/router";
 import Articles from "./components/Articles";
 import Homepage from "./components/Homepage";
 import SingleArticle from "./components/SingleArticle";
@@ -14,62 +14,55 @@ import TopicForm from "./components/TopicForm";
 import NewUser from "./components/NewUser";
 import LogInPage from "./components/LogInPage";
 import NewArticle from "./components/NewArticle";
+import TopicsNavBar from "./components/TopicsNavBar";
 
 class App extends Component {
   state = { user: {}, topicsAdded: false };
   render() {
+    const { user, topicsAdded } = this.state;
     return (
       <main className="main">
-        <div>
+        <div className="head">
           <Header />
 
-          <NavBar
-            setUser={this.setUser}
-            username={this.state.user.username}
-            topicsAdded={this.state.topicsAdded}
+          <NavBar setUser={this.setUser} username={user.username} />
+        </div>
+        <div className="mainview">
+          <TopicsNavBar
+            topicsAdded={topicsAdded}
             updateTopics={this.updateTopics}
           />
-        </div>
-        <div className="leftcolumn">
           <Router>
             <LogInPage
               path="/login"
-              username={this.state.user.username}
+              username={user.username}
               setUser={this.setUser}
             />
             <Homepage
               path="/"
-              username={this.state.user.username}
+              username={user.username}
               setUser={this.setUser}
             />
-            <Articles
-              path="/articles/topics/:topic"
-            />
+            <Articles path="/articles/topics/:topic" />
             <Articles path="/articles" />
             <MostPopular path="/feature-articles/:feature" />
-            <SingleArticle
-              path="/articles/:article_id"
-              user={this.state.user.username}
-            />
+            <SingleArticle path="/articles/:article_id" user={user.username} />
             <Users path="/users" />
-            <UserProfile
-              path="/users/:username"
-              user={this.state.user.username}
-            />
+            <UserProfile path="/users/:username" user={user.username} />
             <TopicForm path="/create-topic" updateTopics={this.updateTopics} />
             <NewUser path="/create-new-user" setUser={this.setUser} />
             <NewArticle
               path="/create-new-article"
-              username={this.state.user.username}
+              username={user.username}
               setUser={this.setUser}
             />
             <ErrorMessages
               default
               path="/"
-              err={{ msg: "somethings wrong...", status: 500 }}
+              err={{ msg: "not found", status: 404 }}
             />
-          </Router>
-        </div>
+          </Router></div>
+      
       </main>
     );
   }

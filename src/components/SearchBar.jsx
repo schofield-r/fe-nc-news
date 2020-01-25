@@ -3,13 +3,14 @@ import React, { Component } from "react";
 class SearchBar extends Component {
   state = { searchTerm: "", searchParams: "" };
   render() {
+    const {searchParams,searchTerm}=this.state
     return (
       <div>
         <form>
           <label htmlFor="searchTerm">Search {this.props.searchParams}</label>
           <input
             onChange={this.handleChange}
-            value={this.state.searchTerm}
+            value={searchTerm}
             placeholder="Search"
           ></input>
         </form>

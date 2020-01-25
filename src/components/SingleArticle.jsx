@@ -12,12 +12,13 @@ class SingleArticle extends Component {
   state = { article: [], isLoading: true, err: null };
 
   render() {
-    const { article } = this.state;
-    if (this.state.isLoading) {
+    const{article_id,user}=this.props
+    const { article,isLoading,err } = this.state;
+    if (isLoading) {
       return <Loading />;
     }
-    if (this.state.err) {
-      return <ErrorMessages err={this.state.err} />;
+    if (err) {
+      return <ErrorMessages err={err} />;
     }
     return (
       <div>
@@ -46,7 +47,7 @@ class SingleArticle extends Component {
         <br></br>
         <br></br>
         <ViewToggler>
-          <Comments article_id={this.props.article_id} user={this.props.user} />
+          <Comments article_id={article_id} user={user} />
         </ViewToggler>
       </div>
     );

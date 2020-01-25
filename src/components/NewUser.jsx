@@ -14,11 +14,12 @@ class NewUser extends Component {
     created: false
   };
   render() {
-    // if (this.state.isLoading) {
-    //   return <Loading />;
-    // }
-    if (this.state.err) {
-      return <ErrorMessages err={this.state.err} />;
+    const{isLoading,err}=this.state
+    if (isLoading) {
+      return <Loading />;
+    }
+    if (err) {
+      return <ErrorMessages err={err} />;
     }
     const { username, name, avatar_url } = this.state;
     return (
