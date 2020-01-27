@@ -5,21 +5,15 @@ import { Link } from "@reach/router";
 class LogInPage extends Component {
   state = { username: "", user: {}, loggedIn: false, users: [] };
   render() {
-    const { users,user,loggedIn,username } = this.state;
+    const { users, user, loggedIn, username } = this.state;
     return (
-    // <div className='form'>
-      <section className='form'>
+      <section className="form">
         {loggedIn ? (
           <>
             <p>You are now logged in as {user.username}</p>
             <p>Name: {user.name}</p>
 
-            <img
-              src={user.avatar_url}
-              className="avatar"
-              alt="avatar"
-            />
-            
+            <img src={user.avatar_url} className="avatar" alt="avatar" />
           </>
         ) : (
           <>
@@ -32,7 +26,7 @@ class LogInPage extends Component {
                 required
               >
                 <option disabled value="">
-                Choose login username 
+                  Choose login username
                 </option>
                 {users.map(user => {
                   return (
@@ -45,7 +39,8 @@ class LogInPage extends Component {
 
               <button className="btn">Login</button>
             </form>
-              <p>or </p><Link to='/create-new-user'>create new user</Link>
+            <p>or </p>
+            <Link to="/create-new-user">create new user</Link>
           </>
         )}
       </section>

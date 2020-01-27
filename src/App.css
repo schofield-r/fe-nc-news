@@ -1,330 +1,89 @@
-.homepage{
+.main {
+  color: rgb(32, 32, 32);
+  background-color: rgb(255, 255, 255);
+  font-family: "Exo 2", sans-serif;
+}
+main {
+  margin-left: 10px;
+}
+.mainviewhome {
   display: flex;
 }
-
-
-
-.App {
-  /* text-align: center; */
-  background-color: #3a3335;
-  color: #d81e5b;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #3a3335;
-  /* align-items: center; */
-  /* justify-content: center; */
-  font-size: calc(10px + 2vmin);
-  color: #eb5e55;
-}
-
-.App-link {
-  color: #eb5e55;
-}
-
-
-
-body {
-  font-family: "Lato", Calibri, Arial, sans-serif;
-  color: #3a3335;
-  background: #3a3335;
+.mainview {
+  display: flex;
 }
 .articleBox {
-  border: #fff;
-  border-width: thin;
-  background-color: #fdf0d5;
-  align-content: center;
-  padding-left: 5vh;
-  padding-right: 5vh;
-  padding-bottom: 5vh;
-  padding-top: 5vh;
-}
-
-h2{
-  text-transform: capitalize;
-  color:#eb5e55 ;
-  text-align: left;
-}
-h3{
-  text-align: left;
-}
-
-a {
-  color: #eb5e55;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration-line: none;
-  color: #d81e5b;
-}
-a:active {
-  text-decoration: underline;
-}
-#select {
-  color: D81E5B;
-  background-color: D81E5B;
-}
-#option {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-/* .navBar{
-  
-  background-image: url('https://i.imgur.com/2hxphxL.jpg');
-   background-repeat: no-repeat; 
-     background-position: center; 
-    border-width: medium;
-    
-    background-color:#FDF0D5 ;
-    color:#EB5E55 ;
-    font-weight: bolder;
-      list-style-type: none;
-
-  } */
-/* Add a black background color to the top navigation */
-/* .topnav {
-  background-color: #3a3335;
-  overflow: hidden;
-} */
-
-/* Style the links inside the navigation bar */
-/* .topnav a {
-  background-color: #fdf0d5;
-  float: left;
-  flex-direction: row;
-  flex-flow: ;
-  color: #eb5e55;
-  text-align: center;
-  padding: 20px 30px;
-align-items: center;
-  text-decoration: none;
-  font-size: 17px;
-} */
-
-/* Change the color of links on hover */
-/* .topnav a:hover {
-  background-color: #d7fdf0;
-  color: #3a3335;
-} */
-
-/* Add a color to the active/current link */
-/* .topnav a.active {
-  background-color: #4caf50;
-  color: #eb5e55;
-} */
-/* The container must be positioned relative: */
-.custom-select {
-  position: relative;
-  font-family: Arial;
-}
-
-.custom-select select {
-  display: none; /*hide original SELECT element: */
-}
-
-.select-selected {
-  background-color: DodgerBlue;
-}
-
-/* Style the arrow inside the select element: */
-.select-selected:after {
-  position: absolute;
-  content: "";
-  top: 14px;
-  right: 10px;
-  width: 0;
-  height: 0;
-  border: 6px solid transparent;
-  border-color: #fff transparent transparent transparent;
-}
-
-/* Point the arrow upwards when the select box is open (active): */
-.select-selected.select-arrow-active:after {
-  border-color: transparent transparent #fff transparent;
-  top: 7px;
-}
-
-/* style the items (options), including the selected item: */
-.select-items div,
-.select-selected {
-  color: #ffffff;
-  padding: 8px 16px;
-  border: 1px solid transparent;
-  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-  cursor: pointer;
-}
-
-/* Style items (options): */
-.select-items {
-  position: absolute;
-  background-color: #3a3335;;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: 99;
-}
-
-/* Hide the items when the select box is closed: */
-.select-hide {
-  display: none;
-}
-
-.select-items div:hover,
-.same-as-selected {
-  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background-color: #dddddd;
+  padding: 20px;
 }
 .avatar {
   max-height: 100px;
   max-width: 100px;
 }
-
-.btn {
-  flex: 1 1 auto;
-  margin: 1px;
-  padding: 11px;
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 900;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: #fdf0d5;
-  /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
-  box-shadow: 0 0 0px rgb(32, 28, 29);
-  border-color: #3a3335;
-  border-width: 0px;
-  border-radius:.5em;
-  background-image: linear-gradient(
-    to right,
-    #d81e5b 0%,
-    #eb5e55 51%,
-    #f6d365 100%
-  );
+.userslist li {
+  list-style: none;
+  padding: 5px;
+  margin: 7px;
+  border-radius: 7px;
+  display: grid;
+  border-radius: 5px;
+  background-color: #dddddd;
+  padding: 20px;
 }
-.btn:hover {
-  background-position: right center; /* change the direction of the change here */
+button {
+  background-color: rgb(121, 121, 121);
+  color: rgb(20, 20, 20);
+  padding: 14px 20px;
+  margin: 8px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
-
-.btn-1 {
-  background-image: linear-gradient(
-    to right,
-    #f6d365 0%,
-    #fda085 51%,
-    #f6d365 100%
-  );
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }
-.wholeNavBar {
-  align-items: center;
+.userslist ul {
+  display: grid;
 }
-.select-css {
-	/* display: block; */
-	font-size: 16px;
-	font-family: sans-serif;
-	font-weight: 700;
-	color:    #3a3335;
-	line-height: 1.3;
-	padding: .5em 1.4em .5em .5em;
-	/* width: 100%; */
-	/* max-width: 20%; */
-	box-sizing: border-box;
-	margin: 3vh;
-	border: 1px solid #aaa;
-	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
-	border-radius: .5em;
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	appearance: none;
-	background-color: #d7fdf0;
-	background-image: url('https://i.imgur.com/mXI9Eu4.png'),
-	  linear-gradient(to bottom, #d7fdf0 0%,#d7fdf0 100%);
-	background-repeat: no-repeat, repeat;
-	background-position: right .7em top 50%, 0 0;
-  background-size: .65em auto, 100%;
-  
-}
-.select-css::-ms-expand {
-	display: none;
-}
-.select-css:hover {
-  border-color: #888;
- 
-  
-}
-.select-css:focus {
-	border-color: #aaa;
-	box-shadow: 0 0 1px 3px #d81e5b;
-	box-shadow: 0 0 0 3px -moz-mac-focusring;
-	color:    #3a3335;
-	outline: none;
-}
-.select-css option {
-	font-weight:normal;
-}
-/* colours{
- background-color:   #3a3335;
- background-color: #d81e5b;
- color: #eb5e55;
-   background: #d7fdf0;
-     background-color: #fdf0d5;
-} */
-
-/* The sidebar menu */
-.sidenav {
-  height: 100%; /* Full-height: remove this if you want "auto" height */
- 
-  
-  width: 20%; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  right: 0;
-  background-color: #111; /* Black */
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px;
+.userslist {
+  padding: 5px;
+  display: grid;
 }
 
-/* The navigation menu links */
-.sidenav li {
-  /* float: right; */
-  padding: 6px 8px 6px 16px;
+.cardlist li {
+  list-style: none;
+  margin: 7px;
+  border-radius: 7px;
+  border-radius: 5px;
+  background-color: #dbdbdb;
+  padding: 10px;
+}
+.articleslist {
+  padding: 5px;
+  width: 100%;
+  display: flexbox;
+  order: 0;
+}
+a {
+  color: #d60202;
   text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
+}
+a:hover {
+  text-decoration-line: none;
+  color: #000000;
+}
+a:active {
+  text-decoration: underline;
+}
+.loading {
+  background-color: rgb(170, 160, 160);
 }
 
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-/* Style page content */
-.main {
-  margin-left: 160px; /* Same as the width of the sidebar */
-  padding: 0px 10px;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-.topnav{
-  position: fixed;
-}
-.form{
+.form select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -332,4 +91,172 @@ align-items: center;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+.form input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.form button {
+  width: 100%;
+  background-color: rgb(184, 184, 184);
+  color: rgb(20, 20, 20);
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.form {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin: 20px;
+}
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+.loginbutton {
+  float: right;
+  padding: 2px;
+  border: rgb(110, 110, 110);
+  border-style: solid;
+}
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+.select-css {
+  font-size: 16px;
+  font-family: sans-serif;
+  font-weight: 700;
+  color: #3a3335;
+  line-height: 1.3;
+  padding: 0.5em 1.4em 0.5em 0.5em;
+
+  box-sizing: border-box;
+  margin: 3vh;
+  border: 1px solid #aaa;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+  border-radius: 0.5em;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #e7e7e7;
+  background-image: url("https://i.imgur.com/mXI9Eu4.png"),
+    linear-gradient(to bottom, #dadada 0%, #e6e6e6 100%);
+  background-repeat: no-repeat, repeat;
+  background-position: right 0.7em top 50%, 0 0;
+  background-size: 0.65em auto, 100%;
+}
+.select-css::-ms-expand {
+  display: none;
+}
+.select-css:hover {
+  border-color: #888;
+}
+.select-css:focus {
+  border-color: #aaa;
+  box-shadow: 0 0 1px 3px #252525;
+  box-shadow: 0 0 0 3px -moz-mac-focusring;
+  color: #3a3335;
+  outline: none;
+}
+.select-css option {
+  font-weight: normal;
+  padding: 30px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.tab {
+  float: right;
+  top: 0;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  /* width: 30%; */
+  height: 100%;
+}
+.tab button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  width: 90%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tab button:hover {
+  background-color: #ddd;
+}
+
+.tab button.active {
+  background-color: #ccc;
+}
+@media (max-width: 800px) {
+  .mainviewhome {
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media (max-width: 500px) {
+  .mainview {
+    display: flex;
+    flex-direction: column;
+  }
+  .topnav {
+    position: sticky;
+    margin: 0px;
+  }
+
+  .tab {
+    float: right;
+    top: 0;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    /* width: 30%; */
+    height: 100%;
+  }
+  .tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    width: 90%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .tab button:hover {
+    background-color: #ddd;
+  }
+
+  .tab button.active {
+    background-color: #ccc;
+  }
+  .head {
+    background-color: #f1f1f1;
+    position: sticky;
+    top: 0;
+  }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./minimalist.css";
+import "./App.css";
 import { Router } from "@reach/router";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
@@ -32,6 +32,7 @@ class App extends Component {
             topicsAdded={topicsAdded}
             updateTopics={this.updateTopics}
           />
+          >
           <Router>
             <LogInPage
               path="/login"
@@ -61,8 +62,8 @@ class App extends Component {
               path="/"
               err={{ msg: "not found", status: 404 }}
             />
-          </Router></div>
-      
+          </Router>
+        </div>
       </main>
     );
   }
