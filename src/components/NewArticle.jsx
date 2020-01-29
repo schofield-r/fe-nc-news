@@ -31,7 +31,7 @@ class NewArticle extends Component {
         <form onSubmit={this.handleSubmit}>
           <select
             name="selectedTopic"
-            value={selectedTopic}
+            value={location.state.topic || selectedTopic}
             onChange={this.handleChange}
             required
           >
@@ -114,6 +114,7 @@ class NewArticle extends Component {
     let filteredTopic = this.state.topics.find(
       topic => topic.slug === topicVal
     );
+    console.log(filteredTopic);
     this.setState({
       topicDescription: filteredTopic.description
     });
