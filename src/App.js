@@ -15,46 +15,52 @@ import NewUser from "./components/NewUser";
 import LogInPage from "./components/LogInPage";
 import NewArticle from "./components/NewArticle";
 import TopicsNavBar from "./components/TopicsNavBar";
+import * as api from "./components/Api";
 
 class App extends Component {
-  state = { user: {}, topicsAdded: false };
+  state = { user: {}, username: "", topicsAdded: false };
   render() {
-    const { user, topicsAdded } = this.state;
+    const { user, username, topicsAdded } = this.state;
     return (
       <main className="main">
         <div className="head">
           <Header />
 
-          <NavBar setUser={this.setUser} username={user.username} />
+          <NavBar setUser={this.setUser} username={username} user={user} />
         </div>
         <div className="mainview">
           <TopicsNavBar
             topicsAdded={topicsAdded}
             updateTopics={this.updateTopics}
           />
-          >
+
           <Router>
             <LogInPage
               path="/login"
-              username={user.username}
+              user={user}
+              username={username}
               setUser={this.setUser}
             />
             <Homepage
               path="/"
-              username={user.username}
+              user={user}
+              username={username}
               setUser={this.setUser}
             />
             <Articles path="/articles/topics/:topic" />
             <Articles path="/articles" />
             <MostPopular path="/feature-articles/:feature" />
-            <SingleArticle path="/articles/:article_id" user={user.username} />
+            <SingleArticle path="/articles/:article_id" user={user} />
             <Users path="/users" />
-            <UserProfile path="/users/:username" user={user.username} />
+            <UserProfile
+              path="/users/:username"
+            />
             <TopicForm path="/create-topic" updateTopics={this.updateTopics} />
             <NewUser path="/create-new-user" setUser={this.setUser} />
             <NewArticle
               path="/create-new-article"
-              username={user.username}
+              user={user}
+              username={username}
               setUser={this.setUser}
             />
             <ErrorMessages
@@ -67,8 +73,19 @@ class App extends Component {
       </main>
     );
   }
-  setUser = newUser => {
-    this.setState({ user: newUser });
+  componentDidMount() {
+      this.setState({ username: localStorage.currentUser });
+      this.setUser(localStorage.currentUser);
+  }
+  setUser = username => {
+    if (!username) {
+      localStorage.removeItem("currentUser");
+      this.setState({ username: "", user: {} });
+    } else
+      api.getUser(username).then(user => {
+        this.setState({ user: user, username: user.username });
+        localStorage.setItem("currentUser", user.username);
+      });
   };
   updateTopics = val => {
     this.setState({ topicsAdded: val });

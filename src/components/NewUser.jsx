@@ -59,7 +59,7 @@ class NewUser extends Component {
     api
       .postUser(username, name, avatar_url)
       .then(user => {
-        this.props.setUser(user);
+        this.props.setUser(user.username);
         navigate(`/users/${user.username}`);
       })
       .catch(err => {

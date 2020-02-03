@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "@reach/router";
 
-const LogInButton = ({ username, setUser }) => {
+const LogInButton = ({user,username, setUser }) => {
   return (
     <section className="loginbutton">
-      {username !== undefined ? (
+      {username ? (
         <>
-          <p>You are now logged in as {username}</p>
+          <p>You are now logged in as {user.username}</p>
           <button onClick={() => setUser("")} value="null">
             Log Out
           </button>

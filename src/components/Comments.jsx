@@ -20,7 +20,7 @@ class Comments extends Component {
     }
     return (
       <main>
-        {this.props.user && (
+        {this.props.user.username && (
           <SubmitComment
             article_id={article_id}
             addComment={this.addComment}

@@ -31,7 +31,7 @@ class SingleArticle extends Component {
             Posted:{" "}
             {moment(article.created_at).format("MMMM Do YYYY, h:mm:ss a")}
           </p>
-          {this.props.user === article.author ? (
+          {this.props.user.username === article.author ? (
             <button onClick={this.deleteArticle} value={article.article_id}>
               Delete
             </button>

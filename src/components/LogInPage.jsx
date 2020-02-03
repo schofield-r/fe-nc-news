@@ -3,17 +3,21 @@ import * as api from "./Api";
 import { Link } from "@reach/router";
 
 class LogInPage extends Component {
-  state = { username: "", user: {}, loggedIn: false, users: [] };
+  state = { username: "", users: [] };
   render() {
-    const { users, user, loggedIn, username } = this.state;
+    const { users, username } = this.state;
     return (
       <section className="form">
-        {loggedIn ? (
+        {this.props.username ? (
           <>
-            <p>You are now logged in as {user.username}</p>
-            <p>Name: {user.name}</p>
+            <p>You are now logged in as {this.props.user.username}</p>
+            <p>Name: {this.props.user.name}</p>
 
-            <img src={user.avatar_url} className="avatar" alt="avatar" />
+            <img
+              src={this.props.user.avatar_url}
+              className="avatar"
+              alt="avatar"
+            />
           </>
         ) : (
           <>
@@ -46,14 +50,6 @@ class LogInPage extends Component {
       </section>
     );
   }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.username !== prevProps.username) {
-      if (this.props.username === undefined) {
-        this.setState({ loggedIn: false, username: "" });
-      } else this.setState({ username: this.props.username });
-    }
-  }
   handleLogOut = event => {
     event.preventDefault();
     this.props.setUser("");
@@ -61,10 +57,7 @@ class LogInPage extends Component {
 
   handleLogin = event => {
     event.preventDefault();
-    api.getUser(this.state.username).then(user => {
-      this.props.setUser(user);
-      this.setState({ user: user, loggedIn: true });
-    });
+    this.props.setUser(this.state.username);
   };
   handleChange = event => {
     this.setState({ username: event.target.value });
@@ -73,7 +66,6 @@ class LogInPage extends Component {
     api.getUsers().then(users => {
       this.setState({ users: users });
     });
-    this.setState({ username: this.props.username });
   }
 }
 

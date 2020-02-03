@@ -37,7 +37,7 @@ class Articles extends Component {
           ]}
         />
         <h2>{topic || "All Articles"}</h2>
-        {!articles.length && (
+        {!articles.length ? (
           <p>
             There are no articles in this topic, click
             <Link to="/create-new-article" state={{ topic: topic }}>
@@ -46,7 +46,17 @@ class Articles extends Component {
             </Link>{" "}
             to write one in this topic
           </p>
+        ) : (
+          <p>
+            Click
+            <Link to="/create-new-article" state={{ topic: topic }}>
+              {" "}
+              here{" "}
+            </Link>{" "}
+            to write a new article in this topic
+          </p>
         )}
+
         <ArticleCards articles={articles} />
       </main>
     );
@@ -63,13 +73,15 @@ class Articles extends Component {
       });
   }
   componentDidUpdate(prevProps, prevState) {
-    const { sort_by, order } = this.state;
+    const { sort_by, order, articles } = this.state;
     const { topic } = this.props;
     if (
+      prevState.articles.length !== articles.length ||
       prevProps.topic !== topic ||
       sort_by !== prevState.sort_by ||
       order !== prevState.order
     ) {
+      console.log('getting articles')
       api.getArticles(topic, sort_by, order).then(articles => {
         this.setState({ articles: articles, isLoading: false, err: null });
       });

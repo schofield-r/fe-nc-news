@@ -13,12 +13,12 @@ class NewArticle extends Component {
   };
   render() {
     const { selectedTopic, topics, topicDescription, title, body } = this.state;
-    const { username, setUser, location } = this.props;
+    const { user, setUser, location, username } = this.props;
     if (!username) {
       return (
         <>
           <p>Please log in to post an article </p>
-          <LogInPage path="/login" username={username} setUser={setUser} />
+          <LogInPage path="/login" user={user} username={username}  setUser={setUser} />
         </>
       );
     }
@@ -52,10 +52,9 @@ class NewArticle extends Component {
               );
             })}
           </select>
-          <p>topic:{selectedTopic || location.state.topic}</p>
+          <p>topic: {selectedTopic || location.state.topic}</p>
           <p>
-            Description:
-            {topicDescription}
+            Description: {topicDescription}
           </p>
           <label htmlFor="title">Title:</label>
           <input
@@ -79,7 +78,7 @@ class NewArticle extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { title, body } = this.state;
-    const author = this.props.username;
+    const author = this.props.user.username;
     const topic = this.state.selectedTopic;
     api
       .postArticle(title, topic, author, body)
@@ -114,7 +113,6 @@ class NewArticle extends Component {
     let filteredTopic = this.state.topics.find(
       topic => topic.slug === topicVal
     );
-    console.log(filteredTopic);
     this.setState({
       topicDescription: filteredTopic.description
     });

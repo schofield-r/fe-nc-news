@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import * as api from "./Api";
 import ErrorMessages from "./ErrorMessages";
-import Loading from "./Loading";
 
 class SubmitComment extends Component {
-  state = { username: "", body: "", err: null, isLoading: true };
+  state = {  body: "", err: null };
   render() {
-    const { username, body, isLoading, err } = this.state;
-    if (isLoading && username === undefined) {
-      return <Loading />;
-    }
+    const { body, err } = this.state;
+
     if (err) {
       return <ErrorMessages err={err} />;
     }
@@ -31,15 +28,14 @@ class SubmitComment extends Component {
     event.preventDefault();
     const { article_id, user, addComment } = this.props;
     api
-      .postComment(article_id, user, this.state.body)
+      .postComment(article_id, user.username, this.state.body)
       .then(comment => {
         addComment(comment);
-        this.setState({ username: "", body: "" });
+        this.setState({  body: "" });
       })
       .catch(err => {
         this.setState({
-          err: { msg: err.response.data.msg, status: err.response.status },
-          isLoading: false
+          err: { msg: err.response.data.msg, status: err.response.status }
         });
       });
   };

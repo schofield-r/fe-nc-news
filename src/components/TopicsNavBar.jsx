@@ -6,14 +6,12 @@ class TopicsNavBar extends Component {
   state = { topics: [] };
 
   render() {
-    const {topics}=this.state
+    const { topics } = this.state;
     return (
       <nav className="tab">
-        <button className="tablinks">
-          <Link to="/create-topic" className="sidenavlink">
-            Create a new topic
-          </Link>
-        </button>
+        <Link to="/create-topic" className="createtopic">
+          <button >Create a new topic</button>
+        </Link>
         {topics.map(topic => {
           return (
             <Link to={`/articles/topics/${topic.slug}`}>
@@ -28,7 +26,7 @@ class TopicsNavBar extends Component {
     this.fetchTopics();
   }
   componentDidUpdate(prevProps) {
-    const {topicsAdded,updateTopics}=this.props
+    const { topicsAdded, updateTopics } = this.props;
     if (topicsAdded !== prevProps.topicsAdded) {
       this.fetchTopics();
       updateTopics(false);

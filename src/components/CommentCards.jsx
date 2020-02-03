@@ -20,7 +20,7 @@ const CommentCards = ({ comments, user, deleteComment }) => {
               id={comment.comment_id}
               votes={comment.votes}
             />
-            {user === comment.author ? (
+            {user.username === comment.author ? (
               <button onClick={() => deleteComment(comment.comment_id)}>
                 Delete
               </button>

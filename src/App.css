@@ -211,6 +211,17 @@ a:active {
 .tab button.active {
   background-color: #ccc;
 }
+.createtopic {
+  display: block;
+  background-color: inherit;
+  color: rgb(163, 0, 0);
+  width: 90%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+}
 @media (max-width: 800px) {
   .mainviewhome {
     display: flex;
@@ -254,6 +265,19 @@ a:active {
   .tab button.active {
     background-color: #ccc;
   }
+  .createtopic button {
+    display: block;
+    background-color: inherit;
+    color: rgb(189, 0, 0);
+    width: 90%;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
   .head {
     background-color: #f1f1f1;
     position: sticky;
